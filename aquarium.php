@@ -19,7 +19,7 @@ session_start();
     <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
     <nav class="absolute top-4 right-8  z-50 flex space-x-6 text-white font-semibold text-lg"> 
     <div class="flex justify-end space-x-4 mt-4 relative z-10"> 
-    <?php if (isset($_SESSION['id'])): ?> 
+    <?php if (isset($_SESSION['session_id'])): ?> 
         <a href="user.php" class="inline-flex items-center space-x-2 text-lg hover:underline">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
     <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
@@ -176,7 +176,7 @@ session_start();
             <!-- ข้อมูลติดต่อ -->
             <div class="mb-6">
                 <h3 class="text-lg font-semibold">Contact Us</h3>
-                <p class="mt-2">Email: <a href="mailto:contact@example.com" class="text-blue-400 hover:text-blue-600">sinbatzz5678@hotmail.com</a></p>
+                <p class="mt-2">Email: <a href="mailto:contact@example.com" class="text-blue-400 hover:text-blue-600">sinbatzz5678_@hotmail.com</a></p>
                 <p>Phone: <a href="tel:+123456789" class="text-blue-400 hover:text-blue-600">+66 94-830-1760</a></p>
             </div>
             <!-- โซเชียลมีเดีย -->

@@ -1,6 +1,6 @@
 <?php
 session_start();
-//if(isset($_SESSION['id'])){header("Location:aquarium.php");die();}
+if(isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -45,7 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // ตรวจสอบรหัสผ่าน (สมมุติว่าในฐานข้อมูลรหัสผ่านถูกเข้ารหัสไว้แล้ว)
         if (password_verify($pwd, $row['password'])) {
             // บันทึกข้อมูลลงใน session
-            $_SESSION['id'] = session_id();
+            $_SESSION['session_id'] = session_id();
+            $_SESSION['id'] = $row['id'];
             $_SESSION['user'] = $row['username'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['role'] = $row['position'];
