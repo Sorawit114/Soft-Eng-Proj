@@ -64,7 +64,7 @@ if(isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}
       <!-- ตำแหน่งโลโก้มุมบนซ้าย -->
       <div class="absolute top-5 left-5" >
 
-        <a href="aquarium.php" class="text-white text-xl font-bold">Aquarium</a>
+        <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     
       </div>
     </div>

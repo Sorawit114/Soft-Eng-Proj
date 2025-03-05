@@ -43,7 +43,7 @@ if(!isset($_SESSION['session_id'])){
   >
     <!-- ปุ่ม Go Back มุมบนซ้าย -->
     <div class="absolute top-5 left-5 z-20 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Aquarium</a>
+      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
   

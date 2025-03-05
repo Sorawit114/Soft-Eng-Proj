@@ -38,7 +38,7 @@ if(!isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}?>
 
   <!-- ลิงก์ Aquarium มุมบนซ้าย -->
   <div class="absolute top-5 left-5 z-20">
-    <a href="aquarium.php" class="text-white text-xl font-bold">Aquarium</a>
+    <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
   </div>
 
   </header>

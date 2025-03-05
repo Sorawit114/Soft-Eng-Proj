@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Aquarium Activities</title>
+  <title>Equarium Activities</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Poppins -->
@@ -37,7 +37,7 @@
     style="background-image: url('jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#001a4d] to-transparent"></div>
     <div class="absolute top-5 left-5 z-20 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Aquarium</a>
+      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
     <nav class="absolute top-4 right-8 z-50 flex space-x-6 text-white font-semibold text-lg">
       <div class="flex justify-end space-x-4 mt-4 relative z-10">
@@ -295,7 +295,7 @@
 
   <!-- Footer -->
   <footer class="bg-mainBlue text-white py-4 text-center">
-    <p>&copy; 2025 Aquarium. All rights reserved.</p>
+    <p>&copy; 2025 Equarium. All rights reserved.</p>
   </footer>
 </body>
 </html>
