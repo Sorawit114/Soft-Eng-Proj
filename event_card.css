@@ -1,0 +1,76 @@
+/* Container การ์ด */
+.event-card {
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 0.5rem; /* 8px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* รูปภาพด้านบนการ์ด */
+  .event-card__image {
+    width: 100%;
+    height: 12rem; /* h-48: 12rem */
+    object-fit: cover;
+  }
+  
+  /* เนื้อหาภายในการ์ด */
+  .event-card__body {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* ชื่อการ์ด */
+  .event-card__title {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: bold;
+    color: #001a4d;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* ข้อความอื่น ๆ เช่น location หรือ activity */
+  .event-card__text {
+    margin-bottom: 1rem;
+    color: #4a5568; /* สีเทาเข้ม */
+  }
+  
+  /* กลุ่มปุ่มที่ด้านล่างการ์ด */
+  .event-card__buttons {
+    margin-top: auto; /* ดันปุ่มให้ติดด้านล่าง */
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  /* สไตล์ปุ่ม */
+  .event-card__button {
+    background-color: #001a4d;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .event-card__button:hover {
+    background-color: #003080;
+  }
+
+  .location-icon::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.25rem;  /* h-5, 20px */
+    height: 1.25rem; /* w-5, 20px */
+    margin-right: 0.25rem; /* mr-1, 4px */
+    color: red;  /* กำหนดสีเป็นแดง */
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20fill%3D%27none%27%20viewBox%3D%270%200%2024%2024%27%20stroke-width%3D%271.5%27%20stroke%3D%27currentColor%27%20class%3D%27h-5%20w-5%20mr-1%27%3E%3Cpath%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20d%3D%27M15%2010.5a3%203%200%201%201-6%200%203%203%200%200%201%206%200Z%27/%3E%3Cpath%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%20d%3D%27M19.5%2010.5c0%207.142-7.5%2011.25-7.5%2011.25S4.5%2017.642%204.5%2010.5a7.5%207.5%200%201%201%2015%200Z%27/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  
