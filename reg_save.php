@@ -83,7 +83,7 @@ $conn->close();
             poppins: ['Poppins', 'sans-serif'],
           },
           colors: {
-            mainBlue: '#001a4d',
+            mainBlue: '#040F53',
             hoverBlue: '#003080'
           }
         }

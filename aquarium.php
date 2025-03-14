@@ -17,7 +17,7 @@ session_start();
             poppins: ["Poppins", "sans-serif"],
           },
           colors: {
-            mainBlue: "#001a4d",
+            mainBlue: "#040F53",
             hoverBlue: "#003080",
           },
         },
@@ -25,7 +25,7 @@ session_start();
     };
   </script>
 </head>
-<body class="bg-[#0a1f44] text-white">
+<body class="bg-mainBlue text-white">
     <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
     <nav class="absolute top-4 right-8 z-50 flex space-x-6 text-white font-semibold text-lg"> 
   <div class="flex justify-end space-x-4 mt-4 relative z-10"> 
@@ -79,7 +79,7 @@ session_start();
                 <p class="text-3xl">Content</p>
             </div>
         </div>
-        <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#0a1f44] to-transparent"></div>
+        <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#040F53] to-transparent"></div>
     </header>
     
     <main class="p-4">
@@ -96,7 +96,7 @@ session_start();
         
         <section class="py-16">
             <!-- ส่วนจองตั๋ว -->
-            <a href="reservation.php" class="block max-w-4xl mx-auto p-14 border-4 border-white bg-cover bg-center text-white text-center" 
+            <a href="Event.php" class="block max-w-4xl mx-auto p-14 border-4 border-white bg-cover bg-center text-white text-center" 
                  style="background-image: url('imgticket.png');">
                 <h2 class="font-kanit text-4xl font-bold">จองตั๋ว</h2>
             </a>
@@ -211,7 +211,7 @@ session_start();
         </section>
     </main>
     
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-#030D45 text-white py-8">
         <div class="container mx-auto text-center">
             <!-- ข้อมูลติดต่อ -->
             <div class="mb-6">

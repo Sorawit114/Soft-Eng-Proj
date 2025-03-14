@@ -92,7 +92,7 @@ $conn->close();
             poppins: ["Poppins", "sans-serif"],
           },
           colors: {
-            mainBlue: "#001a4d",
+            mainBlue: "#040F53",
             hoverBlue: "#003080",
           },
         },
@@ -175,7 +175,7 @@ $conn->close();
   </form>
 </div>
 
-  <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'a'): ?>
+  <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'a'): ?>
     <div class="flex justify-center mt-10">
       <button id="openModal" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow">
         Add Event

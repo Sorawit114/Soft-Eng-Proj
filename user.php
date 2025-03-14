@@ -21,7 +21,7 @@ if(!isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}?>
             poppins: ["Poppins", "sans-serif"],
           },
           colors: {
-            mainBlue: "#001a4d",
+            mainBlue: "#040F53",
             hoverBlue: "#003080",
           },
         },
