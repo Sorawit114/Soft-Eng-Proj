@@ -66,7 +66,7 @@ session_start();
                 <h2 class="text-5xl font-semibold text-start">Activity</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2 w-4/5 mx-auto">
                     <!-- Card 1 -->
-                    <a href="page1.php" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
+                    <a href="Event.php?activity=ชมสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
                         <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('underwater.jpg');"></div>
                         <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
                             ชมสัตว์น้ำ
@@ -74,7 +74,7 @@ session_start();
                     </a>
                     
                     <!-- Card 2 -->
-                    <a href="page2.php" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
+                    <a href="Event.php?activity=โชว์ให้อาหารสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
                         <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('20250201ENP0002l.jpg');"></div>
                         <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
                             โชว์ให้อาหารสัตว์น้ำ
@@ -82,7 +82,7 @@ session_start();
                     </a>
                     
                     <!-- Card 3 -->
-                    <a href="page3.php" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
+                    <a href="Event.php?activity=การแสดงสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
                         <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('pexels-pixabay-34809.jpg');"></div>
                         <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
                             การแสดงสัตว์น้ำ
