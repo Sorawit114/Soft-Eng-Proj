@@ -9,29 +9,69 @@ session_start();
     <title>Equarium Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        .font-kanit {
-            font-family: 'Kanit', sans-serif !important;
-        }
-    </style>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ["Poppins", "sans-serif"],
+          },
+          colors: {
+            mainBlue: "#001a4d",
+            hoverBlue: "#003080",
+          },
+        },
+      },
+    };
+  </script>
 </head>
 <body class="bg-[#0a1f44] text-white">
     <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
-    <nav class="absolute top-4 right-8  z-50 flex space-x-6 text-white font-semibold text-lg"> 
-    <div class="flex justify-end space-x-4 mt-4 relative z-10"> 
+    <nav class="absolute top-4 right-8 z-50 flex space-x-6 text-white font-semibold text-lg"> 
+  <div class="flex justify-end space-x-4 mt-4 relative z-10"> 
     <?php if (isset($_SESSION['session_id'])): ?> 
-        <a href="user.php" class="inline-flex items-center space-x-2 text-lg hover:underline">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-  </svg>
-  <span><?php echo htmlspecialchars($_SESSION['user']); ?></span>
-</a> 
-     <?php else: ?>
+      <button id="dropdownButton" type="button" class="inline-flex justify-center w-full px-4 py-2 text-xl font-medium text-white-700 focus:outline-none" onclick="toggleDropdown()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>&nbsp
+        <span><?php echo htmlspecialchars($_SESSION['user']); ?></span>
+      </button>
+      <div id="dropdownMenu" class="origin-top-right absolute right-0 top-full mt-2 w-56 rounded-md shadow-lg bg-white hidden">
+  <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'a'): ?>
+      <a href="manager.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Manager</a>
+      <a href="check_payment.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">ตรวจสอบการชำระ</a>
+      <a href="analysis.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Analysis</a>
+      <a href="editinfo_ticket.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Edit Info & Ticket</a>
+      <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Sign Out</a>
+    <?php else: ?>
+      <a href="user.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">User</a>
+      <a href="my_ticket.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">My Ticket</a>
+      <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Sign Out</a>
+    <?php endif; ?>
+  </div>
+</div>
+    <?php else: ?>
        <a href="register.php" class="text-lg hover:underline">Register</a> 
-     <a href="login.php" class="text-lg hover:underline">Sign In</a> 
-    <?php endif; ?> 
-</div> 
- </nav>
+       <a href="login.php" class="text-lg hover:underline">Sign In</a> 
+    <?php endif; ?>
+  </div> 
+</nav>
+
+<script>
+  function toggleDropdown() {
+    const dropdown = document.getElementById('dropdownMenu');
+    dropdown.classList.toggle('hidden');
+  }
+  // ปิด dropdown เมื่อคลิกที่นอกปุ่ม
+  window.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('dropdownMenu');
+    const button = document.getElementById('dropdownButton');
+    if (!button.contains(e.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+</script>
 
         <div class="absolute inset-0 flex items-center pl-8 text-white">
             <div>
@@ -176,7 +216,7 @@ session_start();
             <!-- ข้อมูลติดต่อ -->
             <div class="mb-6">
                 <h3 class="text-lg font-semibold">Contact Us</h3>
-                <p class="mt-2">Email: <a href="mailto:contact@example.com" class="text-blue-400 hover:text-blue-600">sinbatzz5678_@hotmail.com</a></p>
+                <p class="mt-2">Email: <a href="mailto:contact@example.com" class="text-blue-400 hover:text-blue-600">Equarium@hotmail.com</a></p>
                 <p>Phone: <a href="tel:+123456789" class="text-blue-400 hover:text-blue-600">+66 94-830-1760</a></p>
             </div>
             <!-- โซเชียลมีเดีย -->

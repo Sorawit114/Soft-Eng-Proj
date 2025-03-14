@@ -143,7 +143,7 @@ if(!isset($_SESSION['session_id'])){
               </a>
             </li>
             <li>
-              <a href="#" class="flex items-center text-gray-700 hover:text-mainBlue">
+              <a href="pwd.php" class="flex items-center text-gray-700 hover:text-mainBlue">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
                      viewBox="0 0 24 24" stroke-width="1.5" 
                      stroke="currentColor" class="w-5 h-5 mr-2 text-mainBlue">
@@ -239,13 +239,13 @@ if(!isset($_SESSION['session_id'])){
     </p>
     <p class="mb-4 leading-relaxed">
       Feel free to share your thoughts with us at
-      <span class="font-semibold text-mainBlue">sinbatzz5678_@hotmail.com</span>.
+      <span class="font-semibold text-mainBlue">Equarium@hotmail.com</span>.
     </p>
     
     <!-- อีเมลติดต่อ -->
     <p class="text-center text-sm text-gray-600">
       หรือส่งข้อเสนอแนะและคำแนะนำของคุณมาได้ที่ <br>
-      <span class="font-semibold text-mainBlue">sinbatzz5678_@hotmail.com</span>
+      <span class="font-semibold text-mainBlue">Equarium@hotmail.com</span>
     </p>
   </div>
 </div>
