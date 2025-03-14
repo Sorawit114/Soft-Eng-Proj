@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2025 at 02:27 PM
+-- Generation Time: Mar 14, 2025 at 10:46 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,6 +36,21 @@ CREATE TABLE `events` (
   `price` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `name`, `image`, `location`, `activity`, `price`, `created_at`) VALUES
+(1, 'Sealife', 'uploads/1741937891_pexels-nguyen-tran-327588-1703516.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 500.00, '2025-03-14 07:38:11'),
+(4, 'Chiangmai Zoo Aquarium', 'uploads/1741938740_pexels-matej-bizjak-2148520448-30417733.jpg', 'ChiangMai', 'การแสดงสัตว์น้ำ', 350.00, '2025-03-14 07:52:20'),
+(6, 'Aquaria Phuket', 'uploads/1741944329_underwater.jpg', 'Phuket', 'ชมสัตว์น้ำ', 200.00, '2025-03-14 09:25:29'),
+(7, 'Sealife', 'uploads/1741944410_8929102.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 150.00, '2025-03-14 09:26:50'),
+(8, 'Aquaria Phuket', 'uploads/1741938496_pexels-pixabay-34809.jpg', 'Phuket', 'ชมสัตว์น้ำ ให้อาหารสัตว์น้ำ การแสดงสัตว์น้ำ', 600.00, '2025-03-14 07:48:16'),
+(9, 'Aquaria Phuket', 'uploads/1741944805_Male_whale_shark_at_Georgia_Aquarium.jpg', 'Phuket', 'ชมสัตว์น้ำ', 150.00, '2025-03-14 09:33:25'),
+(10, 'Sealife', 'uploads/1741945228_8929161.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 200.00, '2025-03-14 09:40:28'),
+(11, 'Aquaria Phuket', 'uploads/1741945363_pexels-w-w-299285-889929.jpg', 'Phuket', 'ชมสัตว์น้ำ', 250.00, '2025-03-14 09:42:43'),
+(12, 'Sealife', 'uploads/1741945471_pexels-pixabay-64219.jpg', 'Bangkok', 'ชมสัตว์น้ำ การแสดงสัตว์น้ำ', 300.00, '2025-03-14 09:44:31');
 
 -- --------------------------------------------------------
 
@@ -90,7 +105,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `users`

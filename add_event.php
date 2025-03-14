@@ -68,6 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 $errors[] = "Error: " . $stmt->error;
             }
+            header("Location:event.php");
             $stmt->close();
             $conn->close();
         }
