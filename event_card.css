@@ -47,17 +47,12 @@
   
   /* สไตล์ปุ่ม */
   .event-card__button {
-    background-color: #001a4d;
     color: #ffffff;
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 0.25rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .event-card__button:hover {
-    background-color: #003080;
   }
 
   .location-icon::before {

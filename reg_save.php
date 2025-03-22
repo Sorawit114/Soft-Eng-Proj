@@ -17,11 +17,16 @@ $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // รับข้อมูลจากฟอร์ม
-    $user = trim($_POST['user']);
-    $email = trim($_POST['email']);
-    $pwd = $_POST['password'];
+    $user      = trim($_POST['user']);
+    $email     = trim($_POST['email']);
+    $pwd       = $_POST['password'];
+    $firstname = trim($_POST['firstname']);
+    $lastname  = trim($_POST['lastname']);
+    $gender    = trim($_POST['gender']);
+    $birthdate = trim($_POST['birthdate']);
 
-    if (empty($user) || empty($email) || empty($pwd)) {
+    // ตรวจสอบให้แน่ใจว่าฟิลด์ทั้งหมดไม่ว่างเปล่า
+    if (empty($user) || empty($email) || empty($pwd) || empty($firstname) || empty($lastname) || empty($gender) || empty($birthdate)) {
         $error = "Please fill in all fields.";
     } else {
         // ตรวจสอบว่ามี email ซ้ำกันหรือไม่
@@ -36,19 +41,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             // เข้ารหัสรหัสผ่าน
             $hashed_password = password_hash($pwd, PASSWORD_DEFAULT);
-            // ทุกคนที่สมัครเป็นสมาชิก (position = "m")
+            // ทุกคนที่สมัครเป็นสมาชิกจะได้ตำแหน่ง "m" (member)
             $position = "m";
 
             // เตรียมคำสั่ง SQL เพื่อ insert ข้อมูลลงในตาราง users
-            $sql = "INSERT INTO users (username, email, password, position) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO users (username, email, password, position, firstname, lastname, gender, birthdate)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             if ($stmt) {
-                $stmt->bind_param("ssss", $user, $email, $hashed_password, $position);
+                // กำหนด type เป็น string ทั้งหมด (8 ตัวแปร)
+                $stmt->bind_param("ssssssss", $user, $email, $hashed_password, $position, $firstname, $lastname, $gender, $birthdate);
                 if ($stmt->execute()) {
                     // หากสมัครสำเร็จ ให้เปลี่ยนเส้นทางไปที่ login.php
-                    $_SESSION['user'] = $user;
+                    $_SESSION['user']  = $user;
                     $_SESSION['email'] = $email;
-                    $_SESSION['role'] = $position;
+                    $_SESSION['role']  = $position;
                     header("Location: login.php");
                     exit();
                 } else {

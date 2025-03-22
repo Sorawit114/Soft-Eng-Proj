@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include 'navbar.php';
 // รับค่า search parameters จาก GET
 $activity = isset($_GET['activity']) ? trim($_GET['activity']) : '';
 $province = isset($_GET['province']) ? trim($_GET['province']) : '';
@@ -104,76 +104,63 @@ $conn->close();
   <!-- Header -->
   <header class="relative h-96 bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#001a4d] to-transparent"></div>
-    <div class="absolute top-5 left-5 z-20 flex items-center">
+    <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
-    <nav class="absolute top-4 right-8 z-50 flex space-x-6 text-white font-semibold text-lg">
-      <div class="flex justify-end space-x-4 mt-4 relative z-10">
-        <?php if (isset($_SESSION['session_id'])): ?>
-          <a href="user.php" class="inline-flex items-center space-x-2 text-lg hover:underline">
-            <span><?php echo htmlspecialchars($_SESSION['user']); ?></span>
-          </a>
-        <?php else: ?>
-          <a href="register.php" class="text-lg hover:underline">Register</a>
-          <a href="login.php" class="text-lg hover:underline">Sign In</a>
-        <?php endif; ?>
-      </div>
-    </nav>
   </header>
 
   <!-- Search Bar -->
-<div class="flex justify-center mt-4">
-  <form action="event.php" method="GET" class="bg-white text-[#001a4d] px-4 py-2 inline-flex items-center space-x-4 rounded-lg max-w-2xl w-auto mx-auto shadow">
-    <!-- Activity -->
-    <div class="flex items-center space-x-1">
-      <span class="font-semibold">Activity:</span>
-      <select name="activity" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
-        <option value="" <?php if($activity == '') echo "selected"; ?>>all</option>
-        <option value="ชมสัตว์น้ำ" <?php if($activity == 'ชมสัตว์น้ำ') echo "selected"; ?>>ชมสัตว์น้ำ</option>
-        <option value="ให้อาหารสัตว์น้ำ" <?php if($activity == 'ให้อาหารสัตว์น้ำ') echo "selected"; ?>>ให้อาหารสัตว์น้ำ</option>
-        <option value="การแสดงสัตว์น้ำ" <?php if($activity == 'การแสดงสัตว์น้ำ') echo "selected"; ?>>การแสดงสัตว์น้ำ</option>
-      </select>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
+  <div class="flex justify-center mt-4">
+    <form action="event.php" method="GET" class="bg-white text-[#001a4d] px-4 py-2 inline-flex items-center space-x-4 rounded-lg max-w-2xl w-auto mx-auto shadow">
+      <!-- Activity -->
+      <div class="flex items-center space-x-1">
+        <span class="font-semibold">Activity:</span>
+        <select name="activity" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
+          <option value="" <?php if($activity == '') echo "selected"; ?>>all</option>
+          <option value="ชมสัตว์น้ำ" <?php if($activity == 'ชมสัตว์น้ำ') echo "selected"; ?>>ชมสัตว์น้ำ</option>
+          <option value="ให้อาหารสัตว์น้ำ" <?php if($activity == 'ให้อาหารสัตว์น้ำ') echo "selected"; ?>>ให้อาหารสัตว์น้ำ</option>
+          <option value="การแสดงสัตว์น้ำ" <?php if($activity == 'การแสดงสัตว์น้ำ') echo "selected"; ?>>การแสดงสัตว์น้ำ</option>
+        </select>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
 
-    <!-- Province -->
-    <div class="flex items-center space-x-1">
-      <span class="font-semibold">Province:</span>
-      <select name="province" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
-        <option value="" <?php if($province == '') echo "selected"; ?>>all</option>
-        <option value="bangkok" <?php if($province == 'bangkok') echo "selected"; ?>>Bangkok</option>
-        <option value="phuket" <?php if($province == 'phuket') echo "selected"; ?>>Phuket</option>
-        <option value="chiangmai" <?php if($province == 'chiangmai') echo "selected"; ?>>Chiang Mai</option>
-      </select>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
+      <!-- Province -->
+      <div class="flex items-center space-x-1">
+        <span class="font-semibold">Province:</span>
+        <select name="province" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
+          <option value="" <?php if($province == '') echo "selected"; ?>>all</option>
+          <option value="bangkok" <?php if($province == 'bangkok') echo "selected"; ?>>Bangkok</option>
+          <option value="phuket" <?php if($province == 'phuket') echo "selected"; ?>>Phuket</option>
+          <option value="chiangmai" <?php if($province == 'chiangmai') echo "selected"; ?>>Chiang Mai</option>
+        </select>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
 
-    <!-- Price -->
-    <div class="flex items-center space-x-1">
-      <span class="font-semibold">Price:</span>
-      <select name="price" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
-        <option value="" <?php if($price == '') echo "selected"; ?>>all</option>
-        <option value="low" <?php if($price == 'low') echo "selected"; ?>>Low to High</option>
-        <option value="high" <?php if($price == 'high') echo "selected"; ?>>High to Low</option>
-      </select>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-      </svg>
-    </div>
+      <!-- Price: ลบ option "all" ออก -->
+      <div class="flex items-center space-x-1">
+        <span class="font-semibold">Price:</span>
+        <select name="price" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
+          <option value="low" <?php if($price == 'low') echo "selected"; ?>>Low to High</option>
+          <option value="high" <?php if($price == 'high') echo "selected"; ?>>High to Low</option>
+        </select>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
 
-    <!-- ปุ่มไอคอนค้นหา -->
-    <button type="submit" class="ml-2 text-[#001a4d] hover:text-blue-700">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 5.25 5.25a7.5 7.5 0 0 0 11.4 11.4z" />
-      </svg>
-    </button>
-  </form>
-</div>
+      <!-- ปุ่มไอคอนค้นหา -->
+      <button type="submit" class="ml-2 text-[#001a4d] hover:text-blue-700">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 5.25 5.25a7.5 7.5 0 0 0 11.4 11.4z" />
+        </svg>
+      </button>
+    </form>
+  </div>
 
   <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'a'): ?>
     <div class="flex justify-center mt-10">
@@ -252,19 +239,62 @@ $conn->close();
   <div class="px-4 py-8 md:px-16 md:py-12 bg-mainBlue">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <?php for ($i = 0; $i < count($events); $i++): ?>
+        <?php
+          // แยก activity เป็นอาร์เรย์ กรณีมีหลายกิจกรรมในฟิลด์เดียวกัน
+          $activityList = preg_split('/[\s,]+/', $events[$i]['activity']);
+        ?>
         <div class="event-card bg-white text-black rounded-lg shadow-md overflow-hidden flex flex-col">
           <div class="h-48">
-            <img src="<?php echo htmlspecialchars($events[$i]['image']); ?>" alt="<?php echo htmlspecialchars($events[$i]['name']); ?>" class="w-full h-full object-cover">
+            <img src="<?php echo htmlspecialchars($events[$i]['image']); ?>" 
+                 alt="<?php echo htmlspecialchars($events[$i]['name']); ?>" 
+                 class="w-full h-full object-cover">
           </div>
           <div class="event-card__body p-4 flex flex-col flex-1">
-            <p class="location-icon mb-1">Location: <?php echo htmlspecialchars($events[$i]['location']); ?></p>
-            <h3 class="event-card__title text-xl font-bold text-[#001a4d] mb-2"><?php echo htmlspecialchars($events[$i]['name']); ?></h3>
-            <p class="event-card__text mb-3">Activity: <?php echo htmlspecialchars($events[$i]['activity']); ?></p>
-            <p class="event-card__text mb-3">Price: ฿<?php echo htmlspecialchars($events[$i]['price']); ?></p>
-            <div class="event-card__buttons mt-auto flex flex-wrap gap-2">
-              <button class="event-card__button bg-[#001a4d] text-white px-3 py-1 rounded hover:bg-hoverBlue">Review</button>
-              <button class="event-card__button bg-[#001a4d] text-white px-3 py-1 rounded hover:bg-hoverBlue">Book</button>
-              <button class="event-card__button bg-[#001a4d] text-white px-3 py-1 rounded hover:bg-hoverBlue">Detail</button>
+            <p class="location-icon mb-1">
+              Location: <?php echo htmlspecialchars($events[$i]['location']); ?>
+            </p>
+            <h3 class="event-card__title text-xl font-bold text-[#001a4d] mb-2">
+              <?php echo htmlspecialchars($events[$i]['name']); ?>
+            </h3>
+            
+            <!-- แสดง Activity แบบ pill -->
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-[#001a4d] font-semibold">Activity:</span>
+              <?php foreach ($activityList as $act): ?>
+                <?php
+                  $act = trim($act);
+                  // กำหนดสีพื้นหลังตามประเภทของ activity
+                  if ($act === 'ชมสัตว์น้ำ') {
+                    $activityBg = "#040F53";
+                  } elseif ($act === 'ให้อาหารสัตว์น้ำ') {
+                    $activityBg = "#162375";
+                  } elseif ($act === 'การแสดงสัตว์น้ำ') {
+                    $activityBg = "#394693";
+                  } else {
+                    $activityBg = "#000000"; // default
+                  }
+                ?>
+                <span class="inline-block px-3 py-1 text-white rounded-full" 
+                      style="background-color: <?php echo $activityBg; ?>;">
+                  <?php echo htmlspecialchars($act); ?>
+                </span>
+              <?php endforeach; ?>
+            </div>
+
+            <div class="event-card__buttons mt-auto flex flex-wrap justify-end gap-2">
+              <!-- ปุ่ม Review -->
+              <a href="review.php?id=<?php echo $events[$i]['id']; ?>" 
+                class="event-card__button px-3 py-1 rounded"
+                style="background-color: #D8AC34;">
+                Review
+              </a>
+
+              <!-- ปุ่ม Detail -->
+              <a href="detail.php?id=<?php echo $events[$i]['id']; ?>" 
+                class="event-card__button px-3 py-1 rounded"
+                style="background-color: #001a4d;">
+                Detail
+              </a>
             </div>
           </div>
         </div>
