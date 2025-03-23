@@ -214,57 +214,10 @@ if(!isset($_SESSION['session_id'])){
           </ul>
         </div>
       </div>
-      
-      <div class="w-full max-w-xl bg-white p-8 rounded-xl shadow-lg min-w-[300px]">
-  <h3 class="text-mainBlue font-semibold text-lg mb-4">Change Password</h3>
-  <form action="change_password.php" method="POST">
-    <div class="mb-4">
-      <label for="old_password" class="block text-sm font-medium text-gray-700">Old Password</label>
-      <input 
-        type="password" 
-        id="old_password" 
-        name="old_password" 
-        class="w-full border border-gray-300 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-mainBlue" 
-        placeholder="Old Password" 
-        required>
-    </div>
-    <div class="mb-4">
-      <label for="new_password" class="block text-sm font-medium text-gray-700">New Password</label>
-      <input 
-        type="password" 
-        id="new_password" 
-        name="new_password" 
-        class="w-full border border-gray-300 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-mainBlue" 
-        placeholder="New Password" 
-        required>
-    </div>
-    <div class="mb-4">
-      <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
-      <input 
-        type="password" 
-        id="confirm_password" 
-        name="confirm_password" 
-        class="w-full border border-gray-300 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-mainBlue" 
-        placeholder="Confirm New Password" 
-        required>
-    </div>
-    <button type="submit" class="mt-6 w-full bg-mainBlue text-white py-2 rounded hover:bg-hoverBlue transition-colors">
-      Save
-    </button>
-    <?php if (isset($_SESSION['success'])): ?>
-      <div class="text-green-500 mt-2">
-        <?php echo $_SESSION['success']; unset($_SESSION['success']); ?>
-      </div>
-    <?php endif; ?>
-    <?php if (isset($_SESSION['error'])): ?>
-      <div class="text-red-500 mt-2">
-        <?php echo $_SESSION['error']; unset($_SESSION['error']); ?>
-      </div>
-    <?php endif; ?>
-  </form>
-</div>
 
-      
+
+
+
     </div>
   </main>
 </body>

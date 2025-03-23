@@ -18,7 +18,7 @@
                 <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Sign Out</a>
               <?php else: ?>
                 <a href="user.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">User</a>
-                <a href="my_ticket.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">My Ticket</a>
+                <a href="myticket.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">My Ticket</a>
                 <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Sign Out</a>
               <?php endif; ?>
             </div>

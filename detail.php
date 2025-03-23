@@ -105,14 +105,25 @@ if (!$event) {
         </p>
       </div>
       <!-- ปุ่ม Buy Ticket -->
+      <?php if (isset($_SESSION['session_id'])): ?>
       <div class="flex justify-end">
-        <a href="buy_ticket.php?id=<?php echo $event['id']; ?>" 
+        <a href="prepay.php?id=<?php echo $event['id']; ?>" 
            class="inline-block bg-mainBlue text-white px-4 py-2 rounded-2xl hover:bg-hoverBlue transition">
           Buy Ticket
-        </a>
+          </a>
+          </div>
+        <?php else: ?>
+          <!-- ถ้ายังไม่ล็อกอิน แสดงปุ่มกด/ลิงก์ หรือแสดง Pop-up -->
+          <div class="flex justify-end">
+            <button 
+              id="openModal" 
+              class="inline-block bg-mainBlue text-white px-4 py-2 rounded-2xl hover:bg-hoverBlue transition">
+              Buy Ticket
+            </button>
+          </div>
+        <?php endif; ?>
       </div>
-    </div>
-  </section>
+    </section>
 
     <!-- ส่วน Reviews (ตัวอย่างเป็นช่องๆ) -->
     <section class="mb-8">
@@ -160,5 +171,42 @@ if (!$event) {
   <footer class="bg-[#001a4d] text-white py-4 text-center">
     <p>&copy; 2025 Equarium. All rights reserved.</p>
   </footer>
+
+    <!-- ส่วน Pop-up (Modal) ที่จะบอกให้ล็อกอินก่อน -->
+  <?php if (!isset($_SESSION['session_id'])): ?>
+    <div 
+      id="loginModal" 
+      class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden"
+    >
+      <div class="bg-gray-200 text-gray-800 p-6 rounded-md shadow-md w-full max-w-sm text-center">
+        <p class="mb-4 text-xl">Please log in to purchase tickets</p>
+        <a href="login.php" class="bg-mainBlue text-white px-4 py-2 rounded hover:bg-hoverBlue">
+          Go to Login
+        </a>
+      </div>
+    </div>
+  <?php endif; ?>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const openModalBtn = document.getElementById('openModal');
+      const loginModal = document.getElementById('loginModal');
+
+      // ถ้ามีปุ่ม openModal แสดงว่า user ยังไม่ล็อกอิน
+      if (openModalBtn && loginModal) {
+        openModalBtn.addEventListener('click', () => {
+          // แสดง modal
+          loginModal.classList.remove('hidden');
+        });
+
+        // ปิด modal เมื่อคลิกที่พื้นหลัง
+        loginModal.addEventListener('click', (e) => {
+          if (e.target === loginModal) {
+            loginModal.classList.add('hidden');
+          }
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>

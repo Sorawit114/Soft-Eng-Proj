@@ -73,8 +73,7 @@ if(isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}
     <!-- กำหนดความกว้างไว้คงที่ เพื่อเลย์เอาต์ดูคงที่ตามดีไซน์ -->
     <div
       class="relative w-[450px] bg-mainBlue text-white flex flex-col h-full 
-             px-8 py-10 z-10 rounded-l-2xl justify-center"
-    >
+             px-8 py-10 z-10 justify-center">
       
       
       <!-- ข้อความต้อนรับ -->

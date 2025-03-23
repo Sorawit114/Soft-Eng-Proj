@@ -49,7 +49,7 @@ if(!isset($_SESSION['session_id'])){
   
   <!-- Main Container -->
   <main class="container mx-auto py-10 px-4  overflow-x-auto">
-    <div class="flex flex-row space-x-8">
+    <div class="flex flex-row space-x-8 justify-center">
       
       <!-- ซ้าย: การ์ดโปรไฟล์ผู้ใช้ -->
       <div class="bg-white w-full max-w-md p-8 rounded-xl shadow-lg mb-8 lg:mb-0 min-w-[300px]">
@@ -85,7 +85,7 @@ if(!isset($_SESSION['session_id'])){
           <h3 class="text-mainBlue font-semibold mb-2">My Account</h3>
           <ul class="space-y-2">
             <li>
-              <a href="#" class="flex items-center text-gray-700 hover:text-mainBlue">
+              <a href="myorder.php" class="flex items-center text-gray-700 hover:text-mainBlue">
                 <svg xmlns="http://www.w3.org/2000/svg" 
                      fill="none" viewBox="0 0 24 24" 
                      stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2 text-mainBlue">
@@ -103,7 +103,7 @@ if(!isset($_SESSION['session_id'])){
               </a>
             </li>
             <li>
-              <a href="#" class="flex items-center text-gray-700 hover:text-mainBlue">
+              <a href="myticket.php" class="flex items-center text-gray-700 hover:text-mainBlue">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
                      viewBox="0 0 24 24" stroke-width="1.5" 
                      stroke="currentColor" class="w-5 h-5 mr-2 text-mainBlue">
