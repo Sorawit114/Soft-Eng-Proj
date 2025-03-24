@@ -28,7 +28,7 @@ include 'navbar.php';
 </head>
 <body class="bg-mainBlue text-white">
   <!-- Header Section -->
-  <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
+  <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <!-- Header Content -->
     <div class="absolute inset-0 flex items-center pl-8">
       <div>
@@ -53,7 +53,7 @@ include 'navbar.php';
 
     <!-- จองตั๋ว Section -->
     <section class="py-16">
-      <a href="Event.php" class="block w-full p-14 border-4 border-white bg-cover bg-center text-white text-center" style="background-image: url('imgticket.png');">
+      <a href="Event.php" class="block w-full p-14 border-4 border-white bg-cover bg-center text-white text-center" style="background-image: url('image/imgticket.png');">
         <h2 class="font-kanit text-4xl font-bold">จองตั๋ว</h2>
       </a>
 
@@ -63,21 +63,21 @@ include 'navbar.php';
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
           <!-- Card 1 -->
           <a href="Event.php?activity=ชมสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
-            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('underwater.jpg');"></div>
+            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('image/underwater.jpg');"></div>
             <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
               ชมสัตว์น้ำ
             </div>
           </a>
           <!-- Card 2 -->
           <a href="Event.php?activity=โชว์ให้อาหารสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
-            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('20250201ENP0002l.jpg');"></div>
+            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('image/20250201ENP0002l.jpg');"></div>
             <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
               โชว์ให้อาหารสัตว์น้ำ
             </div>
           </a>
           <!-- Card 3 -->
           <a href="Event.php?activity=การแสดงสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
-            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('pexels-pixabay-34809.jpg');"></div>
+            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('image/pexels-pixabay-34809.jpg');"></div>
             <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
               การแสดงสัตว์น้ำ
             </div>
@@ -91,7 +91,7 @@ include 'navbar.php';
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <!-- Card 1 -->
           <div class="relative flex bg-white text-black rounded-lg overflow-hidden">
-            <img src="jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg" class="w-2/3 object-cover" alt="Jellyfish">
+            <img src="image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg" class="w-2/3 object-cover" alt="Jellyfish">
             <div class="p-4 flex-1 flex flex-col justify-between">
               <!-- Rating -->
               <div class="text-xl text-yellow-500 font-bold text-right">⭐ 5</div>
@@ -108,7 +108,7 @@ include 'navbar.php';
           </div>
           <!-- Card 2 -->
           <div class="relative flex bg-white text-black rounded-lg overflow-hidden">
-            <img src="pexels-nguyen-tran-327588-1703516.jpg" class="w-2/3 object-cover" alt="Fish">
+            <img src="image/pexels-nguyen-tran-327588-1703516.jpg" class="w-2/3 object-cover" alt="Fish">
             <div class="p-4 flex-1 flex flex-col justify-between">
               <!-- Rating -->
               <div class="text-xl text-yellow-500 font-bold text-right">⭐ 4.9</div>
@@ -125,7 +125,7 @@ include 'navbar.php';
           </div>
           <!-- Card 3 -->
           <div class="relative flex bg-white text-black rounded-lg overflow-hidden">
-            <img src="underwater.jpg" class="w-2/3 object-cover" alt="Dolphin">
+            <img src="image/underwater.jpg" class="w-2/3 object-cover" alt="Dolphin">
             <div class="p-4 flex-1 flex flex-col justify-between">
               <!-- Rating -->
               <div class="text-xl text-yellow-500 font-bold text-right">⭐ 4.5</div>
@@ -142,7 +142,7 @@ include 'navbar.php';
           </div>
           <!-- Card 4 -->
           <div class="relative flex bg-white text-black rounded-lg overflow-hidden">
-            <img src="pexels-pixabay-34809.jpg" class="w-2/3 object-cover" alt="Dolphin">
+            <img src="image/pexels-pixabay-34809.jpg" class="w-2/3 object-cover" alt="Dolphin">
             <div class="p-4 flex-1 flex flex-col justify-between">
               <!-- Rating -->
               <div class="text-xl text-yellow-500 font-bold text-right">⭐ 4.5</div>

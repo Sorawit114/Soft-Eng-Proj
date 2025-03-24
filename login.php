@@ -59,7 +59,7 @@ if(isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}
     <!-- ส่วนซ้าย: รูป BG ขยายเต็มที่ -->
     <div
       class="relative flex-1 bg-cover bg-center"
-      style="background-image: url('8929102.jpg ');"
+      style="background-image: url('image/8929102.jpg ');"
     >
       <!-- ตำแหน่งโลโก้มุมบนซ้าย -->
       <div class="absolute top-5 left-5" >

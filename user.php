@@ -33,7 +33,7 @@ if(!isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}?>
   <!-- Header ที่เป็นรูปภาพ -->
   <header
   class="relative h-32 bg-center bg-cover bg-no-repeat"
-  style="background-image: url('8929102.jpg');"
+  style="background-image: url('image/8929102.jpg');"
 >
 
   <!-- ลิงก์ Aquarium มุมบนซ้าย -->

@@ -44,7 +44,7 @@ if ($id === 0) {
 </head>
 <body class="font-poppins min-h-screen bg-mainBlue">
   <!-- Header ที่เป็นรูปภาพ -->
-  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
+  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <!-- ลิงก์ Aquarium มุมบนซ้าย -->
     <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>

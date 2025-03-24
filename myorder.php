@@ -39,7 +39,7 @@ if(!isset($_SESSION['session_id'])){
   <!-- Header -->
   <header
     class="relative h-32 bg-center bg-cover bg-no-repeat"
-    style="background-image: url('8929102.jpg');"
+    style="background-image: url('image/8929102.jpg');"
   >
     <!-- ปุ่ม Go Back มุมบนซ้าย -->
     <div class="absolute top-5 left-5 z-20 flex items-center">

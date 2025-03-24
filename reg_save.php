@@ -98,7 +98,7 @@ $conn->close();
     };
   </script>
 </head>
-<body class="flex items-center justify-center min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg'); font-family: 'Poppins', sans-serif;">
+<body class="flex items-center justify-center min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg'); font-family: 'Poppins', sans-serif;">
   <div class="bg-white text-gray-800 rounded-xl p-6 max-w-sm shadow-lg text-center">
     <?php 
       if ($error != "") {

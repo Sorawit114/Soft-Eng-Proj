@@ -61,7 +61,7 @@ if (!$ticket) {
 </head>
 <body class="font-poppins min-h-screen bg-mainBlue text-white">
   <!-- Header (รูปพื้นหลัง) -->
-  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
+  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
@@ -78,12 +78,12 @@ if (!$ticket) {
     <!-- การ์ดแสดงตั๋ว -->
     <div class="relative inline-block">
         <!-- รูปตั๋ว -->
-        <img src="ticket1.png" alt="Ticket" class="w-92" />
+        <img src="image/ticket1.png" alt="Ticket" class="w-92" />
         
         <!-- ส่วนแสดง Barcode และ Ticket Code อยู่ด้านขวาของรูป -->
         <div class="absolute inset-y-0 right-0 flex items-center">
             <!-- Barcode -->
-            <img src="barcode.png" alt="Barcode" class="h-96" />
+            <img src="image/barcode.png" alt="Barcode" class="h-96" />
 
             <!-- Ticket Code หมุน 90 องศา -->
             <span class="text-black transform -rotate-90 text-md">

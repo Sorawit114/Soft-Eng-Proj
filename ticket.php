@@ -63,7 +63,7 @@ if (!$event) {
 </head>
 <body class="font-poppins min-h-screen bg-mainBlue text-white">
   <!-- Header ที่เป็นรูปภาพ -->
-  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
+  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <!-- ลิงก์ Aquarium มุมบนซ้าย -->
     <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
@@ -84,7 +84,7 @@ if (!$event) {
 
       <!-- รูปตั๋ว -->
       <div class="relative inline-block mb-8">
-        <img src="ticket1.png" alt="Ticket" class="w-92 mb-3" />
+        <img src="image/ticket1.png" alt="Ticket" class="w-92 mb-3" />
         <!-- ข้อความทับบนรูป (ตัวอย่าง) -->
         <div class="absolute inset-0 flex flex-col items-center justify-center">
           <h2 class="text-2xl font-bold text-black drop-shadow-lg">Demo</h2>

@@ -102,7 +102,7 @@ $conn->close();
 </head>
 <body class="font-poppins bg-mainBlue text-white min-h-screen">
   <!-- Header -->
-  <header class="relative h-96 bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
+  <header class="relative h-96 bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#001a4d] to-transparent"></div>
     <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
