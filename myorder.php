@@ -1,91 +1,123 @@
 <?php
 session_start();
+include 'navbar.php';
 
-// ถ้ายังไม่มี session['id'] แสดงว่ายังไม่ได้ล็อกอิน ให้กลับหน้า aquarium
-if(!isset($_SESSION['session_id'])){
-  header("Location:aquarium.php");
-  die();
+// ตรวจสอบการล็อกอิน
+if (!isset($_SESSION['session_id'])) {
+    header("Location: aquarium.php");
+    die();
 }
+
+// สมมติว่า user id ถูกเก็บไว้ใน $_SESSION['id'] หลังจาก login แล้ว
+if (!isset($_SESSION['id'])) {
+    die("User not found.");
+}
+$user_id = intval($_SESSION['id']);
+
+// เชื่อมต่อฐานข้อมูล
+$conn = new mysqli("localhost", "root", "", "aquarium");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// ดึงข้อมูลผู้ใช้จากตาราง users
+$sqlUser = "SELECT * FROM users WHERE id = ?";
+$stmtUser = $conn->prepare($sqlUser);
+$stmtUser->bind_param("i", $user_id);
+$stmtUser->execute();
+$resultUser = $stmtUser->get_result();
+$user = $resultUser->fetch_assoc();
+$stmtUser->close();
+
+$status = isset($ticket['status']) ? htmlspecialchars($ticket['status']) : "รอการตรวจสอบ";
+$statusClass = "text-yellow-600"; // default = รอการตรวจสอบ
+
+if ($status === "อนุมัติ") {
+    $statusClass = "text-green-600";
+} elseif ($status === "ไม่อนุมัติ") {
+    $statusClass = "text-red-600";
+}
+
+// ดึงข้อมูล ticket ของผู้ใช้ที่รอการอนุมัติ (หรือสถานะอื่น ๆ ตามที่ต้องการ)
+// สมมติว่าในตาราง ticket มีคอลัมน์ status (Approved, Under Review, Not Approved)
+// หากต้องการดึงเฉพาะที่ "Under Review" ให้ปรับ WHERE clause ตามต้องการ
+$sqlTickets = "SELECT t.*, e.name AS event_name, e.image AS event_image, e.location AS event_location 
+               FROM ticket t 
+               JOIN events e ON t.event_id = e.id
+               WHERE t.user_id = ?
+               ORDER BY t.created_at DESC";
+$stmtTickets = $conn->prepare($sqlTickets);
+$stmtTickets->bind_param("i", $user_id);
+$stmtTickets->execute();
+$resultTickets = $stmtTickets->get_result();
+$tickets = [];
+while ($row = $resultTickets->fetch_assoc()) {
+    $tickets[] = $row;
+}
+$stmtTickets->close();
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>User Profile</title>
+  <title>My Orders</title>
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts: Poppins (ตัวอย่าง) -->
+  <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            poppins: ["Poppins", "sans-serif"],
-          },
-          colors: {
-            mainBlue: "#040F53",
-            hoverBlue: "#003080",
-          },
+          fontFamily: { poppins: ["Poppins", "sans-serif"] },
+          colors: { mainBlue: "#040F53", hoverBlue: "#003080" },
         },
       },
     }
   </script>
 </head>
-<body class="font-poppins min-h-screen bg-mainBlue">
+<body class="font-poppins min-h-screen bg-mainBlue text-white">
   <!-- Header -->
-  <header
-    class="relative h-32 bg-center bg-cover bg-no-repeat"
-    style="background-image: url('image/8929102.jpg');"
-  >
-    <!-- ปุ่ม Go Back มุมบนซ้าย -->
-    <div class="absolute top-5 left-5 z-20 flex items-center">
+  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
+    <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
-  
+
   <!-- Main Container -->
-  <main class="container mx-auto py-10 px-4  overflow-x-auto">
-    <div class="flex flex-row space-x-8 justify-center">
-      
-      <!-- ซ้าย: การ์ดโปรไฟล์ผู้ใช้ -->
-      <div class="bg-white w-full max-w-md p-8 rounded-xl shadow-lg mb-8 lg:mb-0 min-w-[300px]">
-        <!-- ส่วนบน: Icon ผู้ใช้, ชื่อ, อีเมล -->
-        <div class="flex flex-col items-center">
-          <!-- Icon ผู้ใช้ (Avatar) -->
+  <main class="py-10 px-4">
+    <!-- Flex Container กำหนด max-width และจัดกึ่งกลางด้วย mx-auto -->
+    <div class="max-w-4xl mx-auto flex flex-col lg:flex-row justify-center items-start space-y-8 lg:space-y-0 lg:space-x-8">
+
+      <!-- Left Column: User Profile -->
+      <div class="bg-white text-black w-full max-w-md p-6 rounded-xl shadow-lg space-y-4 lg:space-y-6">
+        <div class="flex flex-col items-center space-y-2">
+          <!-- User Avatar -->
           <div class="mb-4 text-mainBlue">
-            <!-- ตัวอย่าง Icon SVG รูปคน -->
             <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="M17.982 18.725A7.488 7.488 0 0012 15.75
-                   a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0
-                   10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966
-                   8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0
-                   3 3 0 016 0z" />
+                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0
+                   A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0
+                   3 3 0 0 1 6 0z" />
             </svg>
           </div>
-          <!-- ชื่อผู้ใช้ -->
-          <h2 class="text-xl font-semibold">
-            <?php echo htmlspecialchars($_SESSION['user']); ?>
+          <!-- User Name -->
+          <h2 class="text-xl font-semibold text-black">
+            <?php echo htmlspecialchars($user['username']); ?>
           </h2>
-          <!-- อีเมล -->
+          <!-- User Email -->
           <p class="text-gray-600">
-            <?php echo htmlspecialchars($_SESSION['email']); ?>
+            <?php echo htmlspecialchars($user['email']); ?>
           </p>
         </div>
-        
-        <!-- เส้นแบ่ง -->
         <hr class="my-6" />
-        
-        <!-- ส่วน My Account -->
+        <!-- My Account Links -->
         <div class="mb-4">
           <h3 class="text-mainBlue font-semibold mb-2">My Account</h3>
           <ul class="space-y-2">
             <li>
-              <a href="myorder.php" class="flex items-center text-gray-700 hover:text-mainBlue">
+            <a href="myorder.php" class="flex items-center text-gray-700 hover:text-mainBlue">
                 <svg xmlns="http://www.w3.org/2000/svg" 
                      fill="none" viewBox="0 0 24 24" 
                      stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2 text-mainBlue">
@@ -214,11 +246,59 @@ if(!isset($_SESSION['session_id'])){
           </ul>
         </div>
       </div>
-
-
-
+      
+      <!-- Right Column: Ticket Details -->
+      <div class="flex flex-col lg:w-full max-h-[600px] overflow-auto">
+        <?php if (empty($tickets)): ?>
+          <p class="text-white">ไม่มีการสั่งซื้อบัตร</p>
+        <?php else: ?>
+          <div class="space-y-10 w-full max-w-lg">
+            <?php foreach ($tickets as $ticket): ?>
+              <!-- Ticket Card -->
+              <div class="bg-white text-black rounded-xl shadow-md p-4 w-full">
+                <div class="flex flex-col md:flex-row">
+                  <!-- Left Column: รูป event -->
+                  <div class="flex flex-col items-center md:w-1/3">
+                    <img src="<?php echo htmlspecialchars($ticket['event_image']); ?>" 
+                         alt="<?php echo htmlspecialchars($ticket['event_name']); ?>" 
+                         class="w-32 h-32 object-cover rounded-md" />
+                  </div>
+                  <!-- Right Column: รายละเอียดตั๋ว -->
+                  <div class="md:w-2/3 md:pl-6 mt-4 md:mt-0">
+                    <h2 class="text-2xl font-bold text-mainBlue mb-1">
+                      <?php echo htmlspecialchars($ticket['event_name']); ?>
+                    </h2>
+                    <p class="text-gray-700 mb-1">สถานที่: <?php echo htmlspecialchars($ticket['event_location']); ?></p>
+                    <p class="text-gray-700 mb-1"><?php echo htmlspecialchars($ticket['ticket_quantity']); ?> tickets</p>
+                    <p class="text-gray-700 mb-2">วันที่ชำระเงิน: <?php echo htmlspecialchars($ticket['ticket_date']); ?></p>
+                  </div>
+                </div>
+                <!-- เส้นแบ่ง (hr) -->
+                <hr class="w-full my-2 border-t-2 border-black" />
+                <!-- สถานะและปุ่ม Detail -->
+                <div class="flex items-center justify-between mt-2">
+                  <p class="font-semibold">
+                    <span class="text-mainBlue">สถานะ:</span>
+                    <span class="<?php echo $statusClass; ?>">
+                      <?php
+                        // สมมติว่าตัวแปร $status, $statusClass ถูกกำหนดก่อนแล้ว
+                        echo $status;
+                      ?>
+                    </span>
+                  </p>
+                  <a href="order_detail.php?id=<?php echo $ticket['id']; ?>" 
+                     class="bg-mainBlue text-white px-4 py-2 rounded hover:bg-hoverBlue transition-colors">
+                    Detail
+                  </a>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        <?php endif; ?>
+      </div>
 
     </div>
   </main>
 </body>
 </html>
+

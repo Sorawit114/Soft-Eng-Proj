@@ -111,14 +111,14 @@ $conn->close();
 
   <!-- Search Bar -->
   <div class="flex justify-center mt-4">
-    <form action="event.php" method="GET" class="bg-white text-[#001a4d] px-4 py-2 inline-flex items-center space-x-4 rounded-lg max-w-2xl w-auto mx-auto shadow">
+    <form action="event.php" method="GET" class="bg-white text-[#001a4d] px-4 py-2 inline-flex items-center space-x-4 rounded-lg max-w-3xl w-auto mx-auto shadow">
       <!-- Activity -->
       <div class="flex items-center space-x-1">
         <span class="font-semibold">Activity:</span>
         <select name="activity" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
           <option value="" <?php if($activity == '') echo "selected"; ?>>all</option>
           <option value="ชมสัตว์น้ำ" <?php if($activity == 'ชมสัตว์น้ำ') echo "selected"; ?>>ชมสัตว์น้ำ</option>
-          <option value="ให้อาหารสัตว์น้ำ" <?php if($activity == 'ให้อาหารสัตว์น้ำ') echo "selected"; ?>>ให้อาหารสัตว์น้ำ</option>
+          <option value="โชว์ให้อาหารสัตว์น้ำ" <?php if($activity == 'โชว์ให้อาหารสัตว์น้ำ') echo "selected"; ?>>โชว์ให้อาหารสัตว์น้ำ</option>
           <option value="การแสดงสัตว์น้ำ" <?php if($activity == 'การแสดงสัตว์น้ำ') echo "selected"; ?>>การแสดงสัตว์น้ำ</option>
         </select>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
