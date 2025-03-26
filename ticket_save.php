@@ -30,6 +30,22 @@ if ($event_id === 0 || empty($ticket_date) || $ticket_quantity <= 0) {
     die("Invalid input data.");
 }
 
+$slip_filename = null;
+if (isset($_FILES['slip']) && $_FILES['slip']['error'] === UPLOAD_ERR_OK) {
+    $upload_dir = "uploads/";
+    $original_name = basename($_FILES["slip"]["name"]);
+    $unique_name = uniqid() . "_" . $original_name;
+    $target_path = $upload_dir . $unique_name;
+
+    if (move_uploaded_file($_FILES["slip"]["tmp_name"], $target_path)) {
+        $slip_filename = $unique_name;
+    } else {
+        die("Error uploading slip.");
+    }
+} else {
+    die("Slip file not provided.");
+}
+
 // เชื่อมต่อฐานข้อมูล
 $conn = new mysqli("localhost", "root", "", "aquarium");
 if ($conn->connect_error) {
@@ -54,9 +70,11 @@ $stmt->close();
 $ticket_code = sprintf("%02d", $event_id) . str_replace("-", "", $ticket_date);
 
 // เตรียมคำสั่ง SQL เพื่อ insert ข้อมูลลงในตาราง ticket (เพิ่ม user_id)
-$sqlInsert = "INSERT INTO ticket (user_id, event_id, ticket_code, ticket_date, ticket_quantity, total_price)
-              VALUES (?, ?, ?, ?, ?, ?)";
+$sqlInsert = "INSERT INTO ticket (user_id, event_id, ticket_code, ticket_date, ticket_quantity, total_price, slip_image)
+              VALUES (?, ?, ?, ?, ?, ?, ?)";
 $stmtInsert = $conn->prepare($sqlInsert);
+$stmtInsert->bind_param("iissids", $user_id, $event_id, $ticket_code, $ticket_date, $ticket_quantity, $total_price, $slip_filename);
+
 if (!$stmtInsert) {
     die("Prepare failed: " . $conn->error);
 }

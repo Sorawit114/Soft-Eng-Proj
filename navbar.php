@@ -13,7 +13,7 @@
               <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'a'): ?>
                 <a href="manager.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Manager</a>
                 <a href="check_payment.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">ตรวจสอบการชำระ</a>
-                <a href="analysis.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Analysis</a>
+                <a href="Checkin.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">ยืนยันตั๋ว</a>
                 <a href="editinfo_ticket.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Edit Info & Ticket</a>
                 <a href="logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Sign Out</a>
               <?php else: ?>

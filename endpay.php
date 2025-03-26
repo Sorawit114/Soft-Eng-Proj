@@ -2,35 +2,57 @@
 session_start();
 include 'navbar.php';
 
-// ตรวจสอบการล็อกอิน
 if (!isset($_SESSION['session_id'])) {
-    header("Location: aquarium.php");
-    die();
+    die("กรุณาเข้าสู่ระบบก่อน");
 }
 
-// รับ ticket id จาก GET (ticket id ที่ได้จาก ticket_save.php)
-$ticket_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+// รับ ticket_id จาก GET หรือ POST
+$ticket_id = $_GET['id'] ?? ($_POST['ticket_id'] ?? 0);
+$ticket_id = intval($ticket_id);
 if ($ticket_id === 0) {
-    die("Invalid ticket ID.");
+    die("ไม่พบรหัสตั๋ว");
 }
 
+// ดึงข้อมูลตั๋วจากฐานข้อมูล
 $conn = new mysqli("localhost", "root", "", "aquarium");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// ดึงข้อมูล ticket จากตาราง ticket
-$sql = "SELECT * FROM ticket WHERE id = ?";
-$stmt = $conn->prepare($sql);
+$stmt = $conn->prepare("SELECT * FROM ticket WHERE id = ?");
 $stmt->bind_param("i", $ticket_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $ticket = $result->fetch_assoc();
 $stmt->close();
-$conn->close();
 
 if (!$ticket) {
-    die("Ticket not found.");
+    die("ไม่พบข้อมูลตั๋ว");
+}
+
+// หากมีการส่งฟอร์มอัปโหลด
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['slip'])) {
+    $slip_tmp = $_FILES['slip']['tmp_name'];
+    $slip_name = 'slip_' . uniqid() . '.' . pathinfo($_FILES['slip']['name'], PATHINFO_EXTENSION);
+
+    // ย้ายไฟล์ไปยังโฟลเดอร์ uploads/
+    if (!move_uploaded_file($slip_tmp, "uploads/$slip_name")) {
+        $uploadMessage = "เกิดข้อผิดพลาดในการอัปโหลดสลิป";
+    } else {
+        // บันทึกชื่อไฟล์ลงฐานข้อมูล
+        $conn = new mysqli("localhost", "root", "", "aquarium");
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $update = $conn->prepare("UPDATE ticket SET slip_image = ? WHERE id = ?");
+        $update->bind_param("si", $slip_name, $ticket_id);
+        $update->execute();
+        $update->close();
+        $conn->close();
+
+        $uploadMessage = "อัปโหลดสลิปเรียบร้อยแล้ว ✅";
+    }
 }
 ?>
 <!DOCTYPE html>

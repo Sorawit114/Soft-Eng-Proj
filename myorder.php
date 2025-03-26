@@ -29,14 +29,6 @@ $resultUser = $stmtUser->get_result();
 $user = $resultUser->fetch_assoc();
 $stmtUser->close();
 
-$status = isset($ticket['status']) ? htmlspecialchars($ticket['status']) : "รอการตรวจสอบ";
-$statusClass = "text-yellow-600"; // default = รอการตรวจสอบ
-
-if ($status === "อนุมัติ") {
-    $statusClass = "text-green-600";
-} elseif ($status === "ไม่อนุมัติ") {
-    $statusClass = "text-red-600";
-}
 
 // ดึงข้อมูล ticket ของผู้ใช้ที่รอการอนุมัติ (หรือสถานะอื่น ๆ ตามที่ต้องการ)
 // สมมติว่าในตาราง ticket มีคอลัมน์ status (Approved, Under Review, Not Approved)
@@ -79,7 +71,8 @@ $conn->close();
 </head>
 <body class="font-poppins min-h-screen bg-mainBlue text-white">
   <!-- Header -->
-  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('8929102.jpg');">
+  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
+
     <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
@@ -254,6 +247,17 @@ $conn->close();
         <?php else: ?>
           <div class="space-y-10 w-full max-w-lg">
             <?php foreach ($tickets as $ticket): ?>
+              <?php
+                $status = htmlspecialchars($ticket['status']); // ดึง status จาก DB
+                $statusClass = "text-yellow-600"; // default = รอการตรวจสอบ
+
+                if ($status === "อนุมัติ") {
+                    $statusClass = "text-green-600";
+                } elseif ($status === "ไม่อนุมัติ") {
+                    $statusClass = "text-red-600";
+                }
+              ?>
+
               <!-- Ticket Card -->
               <div class="bg-white text-black rounded-xl shadow-md p-4 w-full">
                 <div class="flex flex-col md:flex-row">
