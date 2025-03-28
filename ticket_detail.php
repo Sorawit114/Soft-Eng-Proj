@@ -146,17 +146,18 @@ $conn->close();
               <div class="bg-white text-black rounded-xl shadow-md p-4 w-full">
                 <div class="flex flex-col md:flex-row justify-bettween">
                   <!-- Left Column: รูป event -->
-                    <p class="mt-2 text-2xl text-mainBlue font-semibold md:w-1/2 text-center">
-                        รหัสบัตร <br>
-                        <?php echo htmlspecialchars($ticket['ticket_code']); ?></p>
-                    </p>
-                    <?php if ($ticket['used'] === 'ใช้งานแล้ว'): ?>
-                        <div class="mt-4 text-center">
-                            <a href="user_review.php?ticket_id=<?php echo $ticket['id']; ?>" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition-colors shadow-md font-semibold">
+                  <p class="mt-2 text-2xl text-mainBlue font-semibold md:w-1/2 text-center">
+                      รหัสบัตร <br>
+                      <?php echo htmlspecialchars($ticket['ticket_code']); ?>
+                      <br>
+                      <?php if ($ticket['used'] === 'ใช้งานแล้ว'): ?>
+
+                          <a href="review.php?ticket_id=<?php echo $ticket['id']; ?>" class="inline-block bg-green-600 text-white mt-2 px-6 py-2 rounded-full hover:bg-green-700 transition-colors shadow-md font-semibold">
                             Review
-                            </a>
-                        </div>
-                        <?php endif; ?>
+                          </a>
+                      <?php endif; ?>
+                  </p>
+              
                   <!-- Right Column: รายละเอียดตั๋ว -->
                 <div class="md:w-1/2 md:pl-6 mt-5 md:mt-0 py-5 text-mainBlue text-2xl">
                     <div class="flex flex-row">

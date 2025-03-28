@@ -70,8 +70,8 @@ $stmt->close();
 $ticket_code = sprintf("%02d", $event_id) . str_replace("-", "", $ticket_date);
 
 // เตรียมคำสั่ง SQL เพื่อ insert ข้อมูลลงในตาราง ticket (เพิ่ม user_id)
-$sqlInsert = "INSERT INTO ticket (user_id, event_id, ticket_code, ticket_date, ticket_quantity, total_price, slip_image)
-              VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sqlInsert = "INSERT INTO ticket (user_id, event_id, ticket_code, ticket_date, ticket_quantity, total_price, slip_image, status, used)
+              VALUES (?, ?, ?, ?, ?, ?, ?, 'รอตรวจสอบ', 'ยังไม่ได้ใช้งาน')";
 $stmtInsert = $conn->prepare($sqlInsert);
 $stmtInsert->bind_param("iissids", $user_id, $event_id, $ticket_code, $ticket_date, $ticket_quantity, $total_price, $slip_filename);
 
@@ -85,7 +85,7 @@ if ($stmtInsert->execute()) {
     // ดึง ticket id ที่เพิ่ง insert ได้
     $ticket_id = $stmtInsert->insert_id;
     // Redirect ไปหน้า payment.php พร้อมส่ง ticket_id ไปด้วย
-    header("Location: payment.php?id=" . $event_id);
+    header("Location: payment.php?id=" . $ticket_id);
     exit();
 } else {
     die("Error inserting ticket: " . $stmtInsert->error);

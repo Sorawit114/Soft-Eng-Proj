@@ -241,9 +241,15 @@ $conn->close();
     <div class="space-y-10 w-full max-w-lg">
       <?php foreach ($tickets as $ticket): ?>
         <?php
-          $status = htmlspecialchars($ticket['used']); // ดึงสถานะจากคอลัมน์ used
-          $statusClass = "text-green-600"; // สีสำหรับ "ยังไม่ได้ใช้งาน"
-        ?>
+        $status = htmlspecialchars($ticket['used']); // ดึงสถานะจากคอลัมน์ used
+
+        // กำหนดสีตามสถานะ
+        if ($status === "ใช้งานแล้ว") {
+            $statusClass = "text-gray-500"; // สีเทา
+        } else {
+            $statusClass = "text-green-600"; // สีเขียวสำหรับ "ยังไม่ได้ใช้งาน"
+        }
+      ?>
 
         <!-- Ticket Card -->
         <div class="bg-white text-black rounded-xl shadow-md p-4 w-full">

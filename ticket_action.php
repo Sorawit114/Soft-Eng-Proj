@@ -14,8 +14,7 @@ $action = $_POST['action'] ?? null;
 // ตรวจสอบข้อมูล
 if (!$ticket_id || !$action) {
   die("Missing ticket ID or action");
-}<?php
-session_start();
+}
 
 // เชื่อมต่อฐานข้อมูล
 $conn = new mysqli("localhost", "root", "", "aquarium");
@@ -66,10 +65,6 @@ if ($success) {
 } else {
   echo "เกิดข้อผิดพลาดในการอัปเดต: " . $conn->error;
 }
-
-$stmt->close();
-$conn->close();
-?>
 
 
 // กำหนดสถานะใหม่ตาม action

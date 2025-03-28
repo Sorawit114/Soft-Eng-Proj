@@ -102,16 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['slip'])) {
         <!-- รูปตั๋ว -->
         <img src="image/ticket1.png" alt="Ticket" class="w-92" />
         
-        <!-- ส่วนแสดง Barcode และ Ticket Code อยู่ด้านขวาของรูป -->
-        <div class="absolute inset-y-0 right-0 flex items-center">
-            <!-- Barcode -->
-            <img src="image/barcode.png" alt="Barcode" class="h-96" />
 
-            <!-- Ticket Code หมุน 90 องศา -->
-            <span class="text-black transform -rotate-90 text-md">
-            <?php echo htmlspecialchars($ticket['ticket_code']); ?>
-            </span>
-        </div>
     </div>
 
     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 justify-end">
