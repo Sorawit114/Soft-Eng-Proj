@@ -1,6 +1,24 @@
 <?php
 session_start();
 include 'navbar.php';
+
+// เชื่อมต่อฐานข้อมูล
+$conn = new mysqli("localhost", "root", "", "aquarium");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// ดึงข้อมูลรีวิวจากฐานข้อมูลพร้อมกับข้อมูลกิจกรรม
+$sql = "SELECT r.*, u.first_name, u.username, e.name AS event_name, e.image AS event_image
+        FROM review r
+        JOIN users u ON r.user_id = u.id
+        JOIN events e ON r.event_id = e.event_id
+        ORDER BY r.created_at DESC LIMIT 3";  // ดึงรีวิวล่าสุด 3 อัน
+$result = $conn->query($sql);
+
+if (!$result) {
+    die("Error: " . $conn->error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,78 +105,25 @@ include 'navbar.php';
 
       <!-- Recommend Section -->
       <section class="my-8">
-        <h2 class="text-5xl font-semibold">Recommend</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          <!-- Card 1 -->
-          <div class="relative flex bg-white text-black rounded-lg overflow-hidden">
-            <img src="image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg" class="w-2/3 object-cover" alt="Jellyfish">
-            <div class="p-4 flex-1 flex flex-col justify-between">
-              <!-- Rating -->
-              <div class="text-xl text-yellow-500 font-bold text-right">⭐ 5</div>
-              <!-- Caption -->
-              <h3 class="text-md text-center w-full">*Caption*</h3>
-              <!-- Location -->
-              <p class="text-sm text-left w-full flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                  <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
-                </svg>
-                location
-              </p>
+      <h2 class="text-5xl font-semibold">รีวิวล่าสุด</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+        
+        <?php while ($review = $result->fetch_assoc()): ?>
+          <div class="relative bg-white rounded-lg overflow-hidden shadow-lg">
+            <img src="<?php echo htmlspecialchars($review['event_image']); ?>" alt="Event Image" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold"><?php echo htmlspecialchars($review['event_name']); ?></h3>
+              <p class="text-md text-black mb-4"><?php echo htmlspecialchars($review['first_name']); ?> - <?php echo date("d M Y", strtotime($review['created_at'])); ?></p>
+              <p class="text-gray-700"><?php echo htmlspecialchars($review['content']); ?></p>
+              <div class="mt-2 flex items-center">
+                <span class="text-yellow-500">⭐ <?php echo htmlspecialchars($review['rating']); ?></span>
+              </div>
             </div>
           </div>
-          <!-- Card 2 -->
-          <div class="relative flex bg-white text-black rounded-lg overflow-hidden">
-            <img src="image/pexels-nguyen-tran-327588-1703516.jpg" class="w-2/3 object-cover" alt="Fish">
-            <div class="p-4 flex-1 flex flex-col justify-between">
-              <!-- Rating -->
-              <div class="text-xl text-yellow-500 font-bold text-right">⭐ 4.9</div>
-              <!-- Caption -->
-              <h3 class="text-md text-center w-full">*Caption*</h3>
-              <!-- Location -->
-              <p class="text-sm text-left w-full flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                  <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
-                </svg>
-                location
-              </p>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="relative flex bg-white text-black rounded-lg overflow-hidden">
-            <img src="image/underwater.jpg" class="w-2/3 object-cover" alt="Dolphin">
-            <div class="p-4 flex-1 flex flex-col justify-between">
-              <!-- Rating -->
-              <div class="text-xl text-yellow-500 font-bold text-right">⭐ 4.5</div>
-              <!-- Caption -->
-              <h3 class="text-md text-center w-full">*Caption*</h3>
-              <!-- Location -->
-              <p class="text-sm text-left w-full flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                  <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
-                </svg>
-                location
-              </p>
-            </div>
-          </div>
-          <!-- Card 4 -->
-          <div class="relative flex bg-white text-black rounded-lg overflow-hidden">
-            <img src="image/pexels-pixabay-34809.jpg" class="w-2/3 object-cover" alt="Dolphin">
-            <div class="p-4 flex-1 flex flex-col justify-between">
-              <!-- Rating -->
-              <div class="text-xl text-yellow-500 font-bold text-right">⭐ 4.5</div>
-              <!-- Caption -->
-              <h3 class="text-md text-center w-full">*Caption*</h3>
-              <!-- Location -->
-              <p class="text-sm text-left w-full flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 mr-2">
-                  <path fill-rule="evenodd" d="m11.54 22.351.07.04.028.016a.76.76 0 0 0 .723 0l.028-.015.071-.041a16.975 16.975 0 0 0 1.144-.742 19.58 19.58 0 0 0 2.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 0 0-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 0 0 2.682 2.282 16.975 16.975 0 0 0 1.145.742ZM12 13.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clip-rule="evenodd" />
-                </svg>
-                location
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        <?php endwhile; ?>
+        
+      </div>
+    </section>
     </section>
   </main>
 

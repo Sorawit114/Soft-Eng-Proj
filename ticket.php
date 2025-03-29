@@ -2,12 +2,7 @@
 session_start();
 include 'navbar.php';
 
-// หากยังไม่ล็อกอิน ให้ redirect ไปหน้า aquarium.php
-if (!isset($_SESSION['session_id'])) {
-  header("Location: aquarium.php");
-  die();
-}
-
+// เชื่อมต่อฐานข้อมูล
 $conn = new mysqli("localhost", "root", "", "aquarium");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -20,7 +15,7 @@ if ($id === 0) {
 }
 
 // ดึงข้อมูล event ตาม id
-$sql = "SELECT * FROM events WHERE id = ?";
+$sql = "SELECT * FROM events WHERE event_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -167,6 +162,7 @@ if (!$event) {
 
       // ดึงราคาต่อใบจากฐานข้อมูล
       const pricePerTicket = parseInt(pricePerTicketSpan.textContent) || 300;
+      const maxTickets = <?php echo $event['ticket_quantity']; ?>; // จำนวนตั๋วที่มี
 
       function updateTotalPrice() {
         const qty = parseInt(quantityInput.value) || 1;
@@ -185,9 +181,11 @@ if (!$event) {
 
       incrementBtn.addEventListener('click', () => {
         let qty = parseInt(quantityInput.value);
-        qty++;
-        quantityInput.value = qty;
-        updateTotalPrice();
+        if (qty < maxTickets) {
+          qty++;
+          quantityInput.value = qty;
+          updateTotalPrice();
+        }
       });
 
       updateTotalPrice();

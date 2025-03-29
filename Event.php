@@ -283,14 +283,14 @@ $conn->close();
 
             <div class="event-card__buttons mt-auto flex flex-wrap justify-end gap-2">
               <!-- ปุ่ม Review -->
-              <a href="review.php?id=<?php echo $events[$i]['id']; ?>" 
+              <a href="user_review.php?id=<?php echo $events[$i]['event_id']; ?>" 
                 class="event-card__button px-3 py-1 rounded"
                 style="background-color: #D8AC34;">
                 Review
               </a>
 
               <!-- ปุ่ม Detail -->
-              <a href="detail.php?id=<?php echo $events[$i]['id']; ?>" 
+              <a href="detail.php?id=<?php echo $events[$i]['event_id']; ?>" 
                 class="event-card__button px-3 py-1 rounded"
                 style="background-color: #001a4d;">
                 Detail

@@ -14,7 +14,6 @@ if (!isset($_SESSION['session_id'])) {
 }
 
 // สมมติว่าคุณเก็บ user id ใน session['user_id'] 
-// (ถ้ายังไม่มีให้ปรับตามที่คุณเก็บ)
 if (!isset($_SESSION['id'])) {
     die("User ID not found in session.");
 }
@@ -30,22 +29,6 @@ if ($event_id === 0 || empty($ticket_date) || $ticket_quantity <= 0) {
     die("Invalid input data.");
 }
 
-$slip_filename = null;
-if (isset($_FILES['slip']) && $_FILES['slip']['error'] === UPLOAD_ERR_OK) {
-    $upload_dir = "uploads/";
-    $original_name = basename($_FILES["slip"]["name"]);
-    $unique_name = uniqid() . "_" . $original_name;
-    $target_path = $upload_dir . $unique_name;
-
-    if (move_uploaded_file($_FILES["slip"]["tmp_name"], $target_path)) {
-        $slip_filename = $unique_name;
-    } else {
-        die("Error uploading slip.");
-    }
-} else {
-    die("Slip file not provided.");
-}
-
 // เชื่อมต่อฐานข้อมูล
 $conn = new mysqli("localhost", "root", "", "aquarium");
 if ($conn->connect_error) {
@@ -53,7 +36,7 @@ if ($conn->connect_error) {
 }
 
 // ดึงราคาตั๋วจากตาราง events สำหรับ event_id ที่ระบุ
-$sql = "SELECT price FROM events WHERE id = ?";
+$sql = "SELECT price FROM events WHERE event_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $event_id);
 $stmt->execute();
@@ -70,22 +53,16 @@ $stmt->close();
 $ticket_code = sprintf("%02d", $event_id) . str_replace("-", "", $ticket_date);
 
 // เตรียมคำสั่ง SQL เพื่อ insert ข้อมูลลงในตาราง ticket (เพิ่ม user_id)
-$sqlInsert = "INSERT INTO ticket (user_id, event_id, ticket_code, ticket_date, ticket_quantity, total_price, slip_image, status, used)
-              VALUES (?, ?, ?, ?, ?, ?, ?, 'รอตรวจสอบ', 'ยังไม่ได้ใช้งาน')";
+$sqlInsert = "INSERT INTO ticket (user_id, event_id, ticket_code, ticket_date, ticket_quantity, total_price, status, used)
+              VALUES (?, ?, ?, ?, ?, ?, 'รอตรวจสอบ')";
 $stmtInsert = $conn->prepare($sqlInsert);
-$stmtInsert->bind_param("iissids", $user_id, $event_id, $ticket_code, $ticket_date, $ticket_quantity, $total_price, $slip_filename);
-
-if (!$stmtInsert) {
-    die("Prepare failed: " . $conn->error);
-}
-// กำหนด type: i (user_id), i (event_id), s (ticket_code), s (ticket_date), i (ticket_quantity), d (total_price)
 $stmtInsert->bind_param("iissid", $user_id, $event_id, $ticket_code, $ticket_date, $ticket_quantity, $total_price);
 
 if ($stmtInsert->execute()) {
     // ดึง ticket id ที่เพิ่ง insert ได้
     $ticket_id = $stmtInsert->insert_id;
-    // Redirect ไปหน้า payment.php พร้อมส่ง ticket_id ไปด้วย
-    header("Location: payment.php?id=" . $ticket_id);
+    // ส่ง event_id ไปยัง payment.php
+    header("Location: payment.php?event_id=" . $event_id);
     exit();
 } else {
     die("Error inserting ticket: " . $stmtInsert->error);

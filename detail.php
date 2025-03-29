@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 // ดึงข้อมูล event ตาม id
-$sql = "SELECT * FROM events WHERE id = ?";
+$sql = "SELECT * FROM events WHERE event_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -107,7 +107,7 @@ if (!$event) {
       <!-- ปุ่ม Buy Ticket -->
       <?php if (isset($_SESSION['session_id'])): ?>
       <div class="flex justify-end">
-        <a href="prepay.php?id=<?php echo $event['id']; ?>" 
+        <a href="prepay.php?id=<?php echo $event['event_id']; ?>" 
            class="inline-block bg-mainBlue text-white px-4 py-2 rounded-2xl hover:bg-hoverBlue transition">
           Buy Ticket
           </a>
@@ -145,7 +145,7 @@ if (!$event) {
       </div>
       <!-- ลิงก์ "อ่านเพิ่มเติม" -->
       <div class="mt-4">
-        <a href="all_reviews.php?id=<?php echo $event['id']; ?>" 
+        <a href="user_review.php?id=<?php echo $event['event_id']; ?>" 
            class="text-white underline">
           อ่านเพิ่มเติม
         </a>

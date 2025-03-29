@@ -2,7 +2,7 @@
 session_start();
 include 'navbar.php';
 
-// หากยังไม่ล็อกอิน ให้ redirect ไปหน้า aquarium.php
+// ตรวจสอบการล็อกอิน
 if (!isset($_SESSION['session_id'])) {
   header("Location: aquarium.php");
   die();
@@ -14,13 +14,13 @@ if ($conn->connect_error) {
 }
 
 // รับค่า id จาก GET (event id)
-$event_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$event_id = isset($_GET['event_id']) ? intval($_GET['event_id']) : 0;
 if ($event_id === 0) {
   die("Invalid event ID.");
 }
 
 // ดึงข้อมูล event ตาม event_id
-$sql = "SELECT * FROM events WHERE id = ?";
+$sql = "SELECT * FROM events WHERE event_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $event_id);
 $stmt->execute();
@@ -49,12 +49,8 @@ $conn->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Payment Summary</title>
-  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  
   <script>
     tailwind.config = {
       theme: {
@@ -72,25 +68,19 @@ $conn->close();
   </script>
 </head>
 <body class="font-poppins min-h-screen bg-mainBlue text-white">
-  <!-- Header ที่เป็นรูปภาพ -->
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
-    <!-- ลิงก์ Aquarium มุมบนซ้าย -->
     <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 
-  <!-- หัวข้อหลัก -->
   <h1 class="text-3xl md:text-5xl font-bold drop-shadow-lg text-white px-8 mt-4">
     สรุปการชำระเงิน
   </h1>
 
-  <!-- ส่วนเนื้อหาหลัก -->
   <main class="max-w-5xl mx-auto px-4 py-8">
-    <!-- รูปตั๋วด้านบน -->
     <div class="relative inline-block mb-8">
       <img src="image/ticket1.png" alt="Ticket" class="w-92" />
-      <!-- ข้อความหรือข้อมูลบนรูปตั๋ว -->
       <div class="absolute inset-0 flex flex-col items-center justify-center">
         <h2 class="text-2xl font-bold text-black drop-shadow-lg">
           <?php echo htmlspecialchars($event['name']); ?>
@@ -98,7 +88,6 @@ $conn->close();
       </div>
     </div>
 
-    <!-- 3 การ์ด: ข้อตกลง / สรุปราคารวม / ปุ่มยืนยัน -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <!-- การ์ด 1: ข้อตกลง -->
       <div class="bg-white text-black rounded p-4">
@@ -139,7 +128,6 @@ $conn->close();
     </div>
   </main>
 
-  <!-- Footer -->
   <footer class="bg-mainBlue text-white py-4 text-center mt-8">
     <p>&copy; 2025 Equarium. All rights reserved.</p>
   </footer>

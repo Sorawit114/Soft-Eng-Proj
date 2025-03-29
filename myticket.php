@@ -28,7 +28,7 @@ $stmtUser->close();
 // ดึงเฉพาะตั๋วที่มี used = 'ยังไม่ได้ใช้งาน'
 $sqlTickets = "SELECT t.*, e.name AS event_name, e.image AS event_image, e.location AS event_location 
                FROM ticket t 
-               JOIN events e ON t.event_id = e.id
+               JOIN events e ON t.event_id = e.event_id
                WHERE t.user_id = ? AND (t.used = 'ยังไม่ได้ใช้งาน' OR t.used = 'ใช้งานแล้ว')
                ORDER BY t.created_at DESC";
 $stmtTickets = $conn->prepare($sqlTickets);
@@ -81,7 +81,7 @@ $conn->close();
         <div class="flex flex-col items-center space-y-2">
           <!-- User Avatar -->
           <div class="mb-4 text-mainBlue">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-40 w-40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0
                    A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0

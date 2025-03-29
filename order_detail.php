@@ -35,7 +35,7 @@ if ($status === "อนุมัติ") {
 $sql = "SELECT t.*, e.name AS event_name, e.image AS event_image, e.location AS event_location, 
                u.username AS user_name
         FROM ticket t
-        JOIN events e ON t.event_id = e.id
+        JOIN events e ON t.event_id = e.event_id
         JOIN users u ON t.user_id = u.id
         WHERE t.user_id = ? AND t.id = ?";
 

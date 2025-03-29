@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $position = "m";
 
             // เตรียมคำสั่ง SQL เพื่อ insert ข้อมูลลงในตาราง users
-            $sql = "INSERT INTO users (username, email, password, position, firstname, lastname, gender, birthdate)
+            $sql = "INSERT INTO users (username, email, password, position, first_name, last_name, gender, dob)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql);
             if ($stmt) {
