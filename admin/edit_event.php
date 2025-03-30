@@ -4,7 +4,7 @@ include 'navbar.php';
 
 if (!isset($_SESSION['session_id']) || $_SESSION['role'] !== 'a') {
     // ถ้าไม่มี session_id หรือ role ไม่ใช่ 'a' ให้ redirect ไปหน้า home
-    header("Location: home.php");
+    header("Location: aquarium.php");
     exit();
 }
 // เชื่อมต่อฐานข้อมูล
