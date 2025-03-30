@@ -9,7 +9,7 @@ class DatabaseTest extends TestCase
     // เชื่อมต่อฐานข้อมูลก่อนทำการทดสอบ
     protected function setUp(): void
     {
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root');
+        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', 'root');
     }
 
     // ทดสอบการเชื่อมต่อฐานข้อมูล
