@@ -1,0 +1,6 @@
+{
+    "name": "user/soft-eng-proj",
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
+    }
+}
