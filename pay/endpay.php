@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 if (!isset($_SESSION['session_id'])) {
     die("กรุณาเข้าสู่ระบบก่อน");
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['slip'])) {
   <!-- Header (รูปพื้นหลัง) -->
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 
@@ -100,17 +100,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['slip'])) {
     <!-- การ์ดแสดงตั๋ว -->
     <div class="relative inline-block">
         <!-- รูปตั๋ว -->
-        <img src="image/ticket1.png" alt="Ticket" class="w-92" />
+        <img src="../image/ticket1.png" alt="Ticket" class="w-92" />
         
 
     </div>
 
     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 justify-end">
-        <a href="aquarium.php" 
+        <a href=" ../home/aquarium.php" 
            class="bg-white text-black px-6 py-2 rounded-md hover:bg-hoverBlue hover:text-white transition-colors">
           กลับสู่หน้าหลัก
         </a>
-        <a href="myorder.php" 
+        <a href="../user/myorder.php" 
            class="bg-white text-black px-6 py-2 rounded-md hover:bg-hoverBlue hover:text-white transition-colors">
           ดูตั๋ว
         </a>

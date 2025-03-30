@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $_SESSION['user']  = $user;
                     $_SESSION['email'] = $email;
                     $_SESSION['role']  = $position;
-                    header("Location: login.php");
+                    header("Location:../login/login.php");
                     exit();
                 } else {
                     $error = "Error: " . $stmt->error;

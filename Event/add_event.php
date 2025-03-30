@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (empty($errors)) {
         // กำหนดโฟลเดอร์สำหรับเก็บไฟล์อัปโหลด
-        $targetDir = "uploads/";
+        $targetDir = "../uploads/";
         // สร้างโฟลเดอร์ถ้ายังไม่มี
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0755, true);
@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 $errors[] = "Error: " . $stmt->error;
             }
-            header("Location:event.php");
+            header("Location:event.phpt");
             $stmt->close();
             $conn->close();
         }

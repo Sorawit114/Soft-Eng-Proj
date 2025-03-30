@@ -46,7 +46,7 @@ if ($used_value) {
 $success = $stmt->execute();
 
 if ($success) {
-  header("Location: check_payment.php?msg=updated");
+  header("Location: ../admin/check_payment.php?msg=updated");
   exit;
 } else {
   echo "เกิดข้อผิดพลาดในการอัปเดต: " . $conn->error;

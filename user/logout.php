@@ -3,6 +3,6 @@
 unset($_SESSION['id']);
 unset($_SESSION['session_id']);
 unset($_SESSION['role']);
-header("Location: aquarium.php");
+header("Location:  ../home/aquarium.php");
 exit();
 ?>

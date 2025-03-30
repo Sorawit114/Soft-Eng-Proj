@@ -1,10 +1,10 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 // Check if admin
 if (!isset($_SESSION['session_id']) || $_SESSION['role'] !== 'a') {
-    header("Location: aquarium.php");
+    header("Location: ../home/aquarium.php");
     exit;
 }
 
@@ -86,9 +86,9 @@ $result = $conn->query($sql);
 </head>
 <body class="bg-mainBlue text-white font-poppins min-h-screen">
 
-<header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
+<header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-        <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+        <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
 </header>
 

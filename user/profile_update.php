@@ -4,7 +4,7 @@ session_start();
 // ตรวจสอบว่าผู้ใช้ล็อกอินอยู่หรือไม่
 if (!isset($_SESSION['session_id'])) {
     $_SESSION['error'] = "User not logged in.";
-    header("Location: login.php");
+    header("Location: ../login/login.php");
     exit();
 }
 

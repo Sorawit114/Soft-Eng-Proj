@@ -42,7 +42,7 @@ if(!isset($_SESSION['session_id'])){
     style="background-image: url('image/8929102.jpg');">
   
     <div class="absolute top-5 left-5 z-20 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
   

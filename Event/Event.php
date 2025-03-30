@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 // รับค่า search parameters จาก GET
 $activity = isset($_GET['activity']) ? trim($_GET['activity']) : '';
 $province = isset($_GET['province']) ? trim($_GET['province']) : '';
@@ -83,7 +83,7 @@ $conn->close();
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="event_card.css">
+  <link rel="stylesheet" href="../src/event_card.css">
   <script>
     tailwind.config = {
       theme: {
@@ -102,10 +102,10 @@ $conn->close();
 </head>
 <body class="font-poppins bg-mainBlue text-white min-h-screen">
   <!-- Header -->
-  <header class="relative h-96 bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
+  <header class="relative h-96 bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#001a4d] to-transparent"></div>
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 
@@ -250,9 +250,15 @@ $conn->close();
                  class="w-full h-full object-cover">
           </div>
           <div class="event-card__body p-4 flex flex-col flex-1">
-            <p class="location-icon mb-1">
+          <div class="flex flex-row space-x-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+            <p class="mb-1">
               Location: <?php echo htmlspecialchars($events[$i]['location']); ?>
             </p>
+            </div>
             <h3 class="event-card__title text-xl font-bold text-[#001a4d] mb-2">
               <?php echo htmlspecialchars($events[$i]['name']); ?>
             </h3>
@@ -283,7 +289,7 @@ $conn->close();
 
             <div class="event-card__buttons mt-auto flex flex-wrap justify-end gap-2">
               <!-- ปุ่ม Review -->
-              <a href="user_review.php?id=<?php echo $events[$i]['event_id']; ?>" 
+              <a href="../event/user_review.php?id=<?php echo $events[$i]['event_id']; ?>" 
                 class="event-card__button px-3 py-1 rounded"
                 style="background-color: #D8AC34;">
                 Review

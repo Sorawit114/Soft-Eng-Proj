@@ -1,10 +1,10 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือยัง
 if (!isset($_SESSION['session_id']) || !isset($_SESSION['id'])) {
-    header("Location: aquarium.php");
+    header("Location:  ../home/aquarium.php");
     exit();
 }
 
@@ -84,7 +84,7 @@ $conn->close();
 <header class="relative h-[300px] md:h-[400px] bg-no-repeat bg-cover bg-center" style="background-image: url('<?php echo htmlspecialchars($event['image']); ?>');">
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#040F53]"></div>
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
     <div class="absolute bottom-5 left-5 z-50">
       <a href="javascript:history.back()" class="inline-flex items-center space-x-2 text-white hover:underline">

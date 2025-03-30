@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 // เชื่อมต่อฐานข้อมูล
 $conn = new mysqli("localhost", "root", "", "aquarium");
@@ -61,7 +61,7 @@ if (!$event) {
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <!-- ลิงก์ Aquarium มุมบนซ้าย -->
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 
@@ -79,7 +79,7 @@ if (!$event) {
 
       <!-- รูปตั๋ว -->
       <div class="relative inline-block mb-8">
-        <img src="image/ticket1.png" alt="Ticket" class="w-92 mb-3" />
+        <img src="../image/ticket1.png" alt="Ticket" class="w-92 mb-3" />
         <!-- ข้อความทับบนรูป (ตัวอย่าง) -->
         <div class="absolute inset-0 flex flex-col items-center justify-center">
           <h2 class="text-2xl font-bold text-black drop-shadow-lg">Demo</h2>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 // เชื่อมต่อฐานข้อมูล
 $conn = new mysqli("localhost", "root", "", "aquarium");
@@ -46,7 +46,7 @@ if (!$result) {
 </head>
 <body class="bg-mainBlue text-white">
   <!-- Header Section -->
-  <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
+  <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('../image/8929102.jpg');">
     <!-- Header Content -->
     <div class="absolute inset-0 flex items-center pl-8">
       <div>
@@ -71,7 +71,7 @@ if (!$result) {
 
     <!-- จองตั๋ว Section -->
     <section class="py-16">
-      <a href="Event.php" class="block w-full p-14 border-4 border-white bg-cover bg-center text-white text-center" style="background-image: url('image/imgticket.png');">
+      <a href="../event/Event.php" class="block w-full p-14 border-4 border-white bg-cover bg-center text-white text-center" style="background-image: url('../image/imgticket.png');">
         <h2 class="font-kanit text-4xl font-bold">จองตั๋ว</h2>
       </a>
 
@@ -80,22 +80,22 @@ if (!$result) {
         <h2 class="text-5xl font-semibold text-start">Activity</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
           <!-- Card 1 -->
-          <a href="Event.php?activity=ชมสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
-            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('image/underwater.jpg');"></div>
+          <a href="../event/Event.php?activity=ชมสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
+            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('../image/underwater.jpg');"></div>
             <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
               ชมสัตว์น้ำ
             </div>
           </a>
           <!-- Card 2 -->
-          <a href="Event.php?activity=โชว์ให้อาหารสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
-            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('image/20250201ENP0002l.jpg');"></div>
+          <a href="../event/Event.php?activity=โชว์ให้อาหารสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
+            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('../image/20250201ENP0002l.jpg');"></div>
             <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
               โชว์ให้อาหารสัตว์น้ำ
             </div>
           </a>
           <!-- Card 3 -->
-          <a href="Event.php?activity=การแสดงสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
-            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('image/pexels-pixabay-34809.jpg');"></div>
+          <a href="../event/Event.php?activity=การแสดงสัตว์น้ำ" class="relative h-56 rounded-lg shadow-lg overflow-hidden cursor-pointer hover:scale-105 transition">
+            <div class="absolute inset-0 bg-cover bg-center blur-[1px]" style="background-image: url('../image/pexels-pixabay-34809.jpg');"></div>
             <div class="font-kanit absolute inset-0 flex items-center justify-center text-white text-3xl text-center z-10">
               การแสดงสัตว์น้ำ
             </div>

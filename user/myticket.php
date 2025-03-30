@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'navbar.php';
+
 
 if (!isset($_SESSION['session_id'])) {
     header("Location: aquarium.php");

@@ -3,13 +3,13 @@ session_start();
 
 // ตรวจสอบ request method
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: aquarium.php");
+    header("Location:  ../home/aquarium.php");
     exit();
 }
 
 // ตรวจสอบการล็อกอิน
 if (!isset($_SESSION['session_id'])) {
-    header("Location: aquarium.php");
+    header("Location:  ../home/aquarium.php");
     exit();
 }
 
@@ -62,7 +62,7 @@ if ($stmtInsert->execute()) {
     // ดึง ticket id ที่เพิ่ง insert ได้
     $ticket_id = $stmtInsert->insert_id;
     // ส่ง event_id ไปยัง payment.php
-    header("Location: payment.php?event_id=" . $event_id);
+    header("Location: ../pay/payment.php?event_id=" . $event_id);
     exit();
 } else {
     die("Error inserting ticket: " . $stmtInsert->error);

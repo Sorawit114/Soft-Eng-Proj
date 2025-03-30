@@ -6,7 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST['email']);
     $pwd = $_POST['password'];
 
-
     // ตรวจสอบว่าผู้ใช้กรอกข้อมูลครบหรือไม่
     if (empty($email) || empty($pwd)) {
         $_SESSION['error'] = "Please fill in all fields.";
@@ -44,7 +43,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // ตรวจสอบรหัสผ่าน (สมมุติว่าในฐานข้อมูลรหัสผ่านถูกเข้ารหัสไว้แล้ว)
         if (password_verify($pwd, $row['password'])) {
-            // บันทึกข้อมูลลงใน session
+            // ตรวจสอบ role หากเป็น 'b' (บัญชีถูกระงับ)
+            if ($row['position'] === 'b') {
+                $_SESSION['error'] = "บัญชีของคุณถูกระงับ";
+                header("Location: login.php");
+                exit();
+            }
+
+            // บันทึกข้อมูลลงใน session สำหรับบัญชีที่ไม่ได้ถูกระงับ
             $_SESSION['session_id'] = session_id();
             $_SESSION['id'] = $row['id'];
             $_SESSION['user'] = $row['username'];
@@ -52,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role'] = $row['position'];
 
             // เปลี่ยนเส้นทางไปยัง aquarium.php
-            header("Location: aquarium.php");
+            header("Location: ../home/aquarium.php");
             exit();
         } else {
             $_SESSION['error'] = "Invalid email or password.";

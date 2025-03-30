@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 if (!isset($_SESSION['session_id'])) {
-    header("Location: aquarium.php");
+    header("Location: ../home/aquarium.php");
     exit;
 }
 
@@ -60,7 +60,7 @@ $conn->close();
   
   <!-- (ตัวอย่าง) Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="event_card.css">
+  <link rel="stylesheet" href="../src/event_card.css">
   <script>
     tailwind.config = {
       theme: {
@@ -86,7 +86,7 @@ $conn->close();
 
   <!-- ลิงก์ Aquarium มุมบนซ้าย -->
   <div class="absolute top-5 left-5 z-50 flex items-center">
-    <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+    <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
   </div>
 
   </header>
@@ -158,7 +158,7 @@ $conn->close();
         <!-- ตั๋วแบบสวยเหมือนในรูป -->
         <div class="relative inline-block mt-8">
             <!-- รูปพื้นหลังตั๋ว -->
-            <img src="image/ticket1.png" alt="Ticket" class="w-[800px] " />
+            <img src="../image/ticket1.png" alt="Ticket" class="w-[800px] " />
 
             <!-- เนื้อหาซ้อนบนรูปตั๋ว -->
             <div class="absolute top-0 left-0 w-full h-full px-6 py-7 flex justify-between">
@@ -195,7 +195,7 @@ $conn->close();
                 <!-- ฝั่งขวา -->
                 <div class="flex flex-col items-center justify-center w-1/4 space-y-4 text-center">
                 <p class="text-sm font-bold text-mainBlue leading-tight">PRESS TO<br>DISPLAY QR<br>CODE</p>
-                <a href="payconfirm.php?id=<?php echo $ticket_id?>" class="border border-mainBlue px-4 py-1 rounded-full text-mainBlue text-sm font-semibold hover:bg-mainBlue hover:text-white transition">
+                <a href="../pay/payconfirm.php?id=<?php echo $ticket_id?>" class="border border-mainBlue px-4 py-1 rounded-full text-mainBlue text-sm font-semibold hover:bg-mainBlue hover:text-white transition">
                     Detail
                 </a>
               </div>

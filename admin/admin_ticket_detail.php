@@ -1,9 +1,9 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 if (!isset($_SESSION['session_id']) || $_SESSION['role'] !== 'a') {
-    header("Location: aquarium.php");
+    header("Location: ../home/aquarium.php");
     exit();
 }
 
@@ -70,9 +70,9 @@ if ($status === "อนุมัติ") {
   </script>
 </head>
 <body class="font-poppins bg-mainBlue text-white min-h-screen">
-  <header class="relative h-32 bg-cover bg-center" style="background-image: url('image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
+  <header class="relative h-32 bg-cover bg-center" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute top-5 left-5 z-10">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 
@@ -116,7 +116,7 @@ if ($status === "อนุมัติ") {
 
     <!-- ปุ่ม -->
     <div class="flex justify-end gap-4 mt-6">
-        <form action="ticket_action.php" method="POST">
+        <form action="../ticket/ticket_action.php" method="POST">
         <input type="hidden" name="ticket_id" value="<?php echo $ticket['id']; ?>">
         <button type="submit" name="action" value="reject"
             class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-6 py-2 rounded">

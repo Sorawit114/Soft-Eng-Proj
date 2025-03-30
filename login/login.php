@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}
+if(isset($_SESSION['session_id'])){header("Location: ../home/aquarium.php");die();}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,12 +59,12 @@ if(isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}
     <!-- ส่วนซ้าย: รูป BG ขยายเต็มที่ -->
     <div
       class="relative flex-1 bg-cover bg-center"
-      style="background-image: url('image/8929102.jpg ');"
+      style="background-image: url('../image/8929102.jpg ');"
     >
       <!-- ตำแหน่งโลโก้มุมบนซ้าย -->
       <div class="absolute top-5 left-5" >
 
-        <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+        <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     
       </div>
     </div>
@@ -137,7 +137,7 @@ if(isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}
         <p class="mt-4 text-sm text-center">
           Don't have an account?
           <a
-            href="register.php"
+            href="../register/register.php"
             class="text-mainBlue font-semibold hover:underline"
           >
             Register here.

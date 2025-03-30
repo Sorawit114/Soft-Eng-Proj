@@ -1,10 +1,10 @@
 <?php
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 // ตรวจสอบการล็อกอิน
 if (!isset($_SESSION['session_id'])) {
-  header("Location: aquarium.php");
+  header("Location:  ../home/aquarium.php");
   die();
 }
 
@@ -70,7 +70,7 @@ $conn->close();
 <body class="font-poppins min-h-screen bg-mainBlue text-white">
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 
@@ -80,7 +80,7 @@ $conn->close();
 
   <main class="max-w-5xl mx-auto px-4 py-8">
     <div class="relative inline-block mb-8">
-      <img src="image/ticket1.png" alt="Ticket" class="w-92" />
+      <img src="../image/ticket1.png" alt="Ticket" class="w-92" />
       <div class="absolute inset-0 flex flex-col items-center justify-center">
         <h2 class="text-2xl font-bold text-black drop-shadow-lg">
           <?php echo htmlspecialchars($event['name']); ?>

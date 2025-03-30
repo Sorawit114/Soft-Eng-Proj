@@ -1,33 +1,58 @@
 <?php
-session_start();
+  session_start();
 
-// เชื่อมต่อฐานข้อมูล
-$conn = new mysqli("localhost", "root", "", "aquarium");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+  // เชื่อมต่อฐานข้อมูล
+  $conn = new mysqli("localhost", "root", "", "aquarium");
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
 
-// รับค่า id จาก GET
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+  // รับค่า id จาก GET
+  $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// ดึงข้อมูล event ตาม id
-$sql = "SELECT * FROM events WHERE event_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$result = $stmt->get_result();
+  // ดึงข้อมูล event ตาม id
+  $sql = "SELECT * FROM events WHERE event_id = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("i", $id);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $event = $result->fetch_assoc();
 
-$event = $result->fetch_assoc();
-include 'navbar.php';
+  include '../includes/navbar.php';
 
-$stmt->close();
-$conn->close();
+  $stmt->close();
 
-// ถ้าไม่พบข้อมูล event ที่มี id ตรงกัน
-if (!$event) {
-  die("Event not found.");
-}
+  // ถ้าไม่พบข้อมูล event ที่มี id ตรงกัน
+  if (!$event) {
+    die("Event not found.");
+  }
+
+  // ดึงรีวิวจากฐานข้อมูลตาม event_id
+  $review_sql = "SELECT r.content, r.rating, r.created_at, u.username
+                FROM review r
+                JOIN users u ON r.user_id = u.id
+                WHERE r.event_id = ?
+                ORDER BY r.created_at DESC";
+  $review_stmt = $conn->prepare($review_sql);
+  $review_stmt->bind_param("i", $id);
+  $review_stmt->execute();
+
+  // ตรวจสอบว่าได้ผลลัพธ์จากคำสั่ง SQL หรือไม่
+  $reviews_result = $review_stmt->get_result();
+  $reviews = [];
+  if ($reviews_result->num_rows > 0) {
+      // ดึงข้อมูลรีวิว
+      while ($review = $reviews_result->fetch_assoc()) {
+          $reviews[] = $review; // เก็บรีวิวในอาเรย์
+      }
+  } else {
+      $reviews[] = null; // ถ้าไม่มีรีวิวก็เพิ่มค่า null
+  }
+
+  $review_stmt->close();
+  $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +88,7 @@ if (!$event) {
   <!-- Gradient Overlay: เฟดจาก mainBlue ไปเป็นโปร่งใส -->
   <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#040F53]"></div>
   <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
 
   <!-- ปุ่ม Back อยู่ด้านล่างซ้าย หลังจากเฟดเสร็จ -->
@@ -105,13 +130,14 @@ if (!$event) {
         </p>
       </div>
       <!-- ปุ่ม Buy Ticket -->
-      <?php if (isset($_SESSION['session_id'])): ?>
-      <div class="flex justify-end">
-        <a href="prepay.php?id=<?php echo $event['event_id']; ?>" 
-           class="inline-block bg-mainBlue text-white px-4 py-2 rounded-2xl hover:bg-hoverBlue transition">
-          Buy Ticket
+      <?php if (isset($_SESSION['session_id']) && $_SESSION['role'] !== 'a'): ?>
+        <!-- แสดงปุ่ม Buy Ticket เฉพาะเมื่อผู้ใช้ไม่ได้มี role เป็น 'a' -->
+        <div class="flex justify-end">
+          <a href="../pay/prepay.php?id=<?php echo $event['event_id']; ?>" 
+            class="inline-block bg-mainBlue text-white px-4 py-2 rounded-2xl hover:bg-hoverBlue transition">
+            Buy Ticket
           </a>
-          </div>
+        </div>
         <?php else: ?>
           <!-- ถ้ายังไม่ล็อกอิน แสดงปุ่มกด/ลิงก์ หรือแสดง Pop-up -->
           <div class="flex justify-end">
@@ -128,25 +154,35 @@ if (!$event) {
     <!-- ส่วน Reviews (ตัวอย่างเป็นช่องๆ) -->
     <section class="mb-8">
       <h3 class="text-xl font-semibold mb-4">Reviews</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <!-- ตัวอย่างรีวิวแบบ placeholder -->
-        <div class="bg-white text-black p-4 rounded">
-          <p>Review 1</p>
+      
+      <!-- ถ้าไม่มีรีวิว -->
+      <?php if (empty($reviews) || $reviews[0] === null): ?>
+        <p class="text-gray-500">No reviews yet. Be the first to leave a review!</p>
+      <?php else: ?>
+        <!-- แสดงรีวิวที่ดึงมาจากฐานข้อมูล -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <?php foreach ($reviews as $review): ?>
+            <div class="bg-white text-black p-4 rounded">
+              <p class="font-semibold"><?php echo htmlspecialchars($review['username']); ?></p>
+              <p class="text-gray-700"><?php echo htmlspecialchars($review['content']); ?></p>
+              
+              <!-- แสดงดาวตามคะแนน -->
+              <p class="text-yellow-500">Rating: 
+                <?php for ($i = 0; $i < $review['rating']; $i++): ?>
+                  ★
+                <?php endfor; ?>
+              </p>
+              
+              <!-- แสดงวันที่รีวิว -->
+              <p class="text-gray-500 text-sm">Posted on: <?php echo date("F j, Y, g:i a", strtotime($review['created_at'])); ?></p>
+            </div>
+          <?php endforeach; ?>
         </div>
-        <div class="bg-white text-black p-4 rounded">
-          <p>Review 2</p>
-        </div>
-        <div class="bg-white text-black p-4 rounded">
-          <p>Review 3</p>
-        </div>
-        <div class="bg-white text-black p-4 rounded">
-          <p>Review 4</p>
-        </div>
-      </div>
+      <?php endif; ?>
+      
       <!-- ลิงก์ "อ่านเพิ่มเติม" -->
       <div class="mt-4">
-        <a href="user_review.php?id=<?php echo $event['event_id']; ?>" 
-           class="text-white underline">
+        <a href="user_review.php?id=<?php echo $event['event_id']; ?>" class="text-white underline">
           อ่านเพิ่มเติม
         </a>
       </div>
@@ -180,7 +216,7 @@ if (!$event) {
     >
       <div class="bg-gray-200 text-gray-800 p-6 rounded-md shadow-md w-full max-w-sm text-center">
         <p class="mb-4 text-xl">Please log in to purchase tickets</p>
-        <a href="login.php" class="bg-mainBlue text-white px-4 py-2 rounded hover:bg-hoverBlue">
+        <a href="../login/login.php" class="bg-mainBlue text-white px-4 py-2 rounded hover:bg-hoverBlue">
           Go to Login
         </a>
       </div>

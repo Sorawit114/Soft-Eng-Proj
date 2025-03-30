@@ -1,10 +1,10 @@
 <?php 
 session_start();
-include 'navbar.php';
+include '../includes/navbar.php';
 
 // หากยังไม่ล็อกอิน ให้ redirect ไปหน้า aquarium.php
 if (!isset($_SESSION['session_id'])) {
-  header("Location: aquarium.php");
+  header("Location:  ../home/aquarium.php");
   die();
 }
 
@@ -47,7 +47,7 @@ if ($id === 0) {
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <!-- ลิงก์ Aquarium มุมบนซ้าย -->
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
   <br>
@@ -72,7 +72,7 @@ if ($id === 0) {
 
     <!-- ปุ่มยืนยัน (ส่งค่า id ไปยัง ticket.php) -->
     <div class="flex justify-end">
-      <a href="ticket.php?id=<?php echo $id; ?>" 
+      <a href="../ticket/ticket.php?id=<?php echo $id; ?>" 
          class="bg-white text-black px-6 py-2 rounded-md hover:bg-hoverBlue transition-colors">
         ยืนยัน
       </a>

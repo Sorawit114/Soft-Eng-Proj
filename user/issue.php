@@ -3,7 +3,7 @@ session_start();
 
 // ถ้ายังไม่มี session['id'] แสดงว่ายังไม่ได้ล็อกอิน ให้กลับหน้า aquarium
 if(!isset($_SESSION['session_id'])){
-  header("Location:aquarium.php");
+  header("Location: ../home/aquarium.php");
   die();
 }
 ?>
@@ -43,7 +43,7 @@ if(!isset($_SESSION['session_id'])){
 
 
     <div class="absolute top-5 left-5 z-20 flex items-center">
-      <a href="aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
   

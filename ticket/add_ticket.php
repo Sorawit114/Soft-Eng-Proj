@@ -50,7 +50,7 @@ $stmtUpdate->execute();
 
 if ($stmtUpdate->affected_rows > 0) {
     // Redirect back to event page after update
-    header("Location: edit_event.php?id=" . $event_id);
+    header("Location: ../admin/edit_event.php?id=" . $event_id);
     exit();
 } else {
     echo "Error updating ticket quantity.";
