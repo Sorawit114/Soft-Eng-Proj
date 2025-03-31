@@ -38,10 +38,12 @@ jobs:
       - name: Set up database
         run: |
           mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS aquarium;"
+          # ถ้าคุณต้องการทำ migrations หรือสร้าง schema คุณสามารถเพิ่มคำสั่งนี้ได้:
+          # php artisan migrate --database=mysql
 
       - name: Check MySQL Connection
         run: |
           mysql -h 127.0.0.1 -u root -proot -e "SHOW DATABASES;"
 
       - name: Run PHPUnit Tests
-        run: vendor/bin/phpunit tests
+        run: vendor/bin/phpunit tests --configuration phpunit.xml
