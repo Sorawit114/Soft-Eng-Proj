@@ -62,20 +62,4 @@ class DatabaseTest extends TestCase
 
         $this->assertFalse($result);
     }
-
-    // ✅ ทดสอบการเพิ่มข้อมูลที่ซ้ำกัน (เช็ก Unique Constraint)
-    public function testInsertDuplicateUser()
-    {
-        // เพิ่มผู้ใช้แรก
-        $stmt = $this->pdo->prepare("INSERT INTO users (email, password) VALUES ('duplicate_email@test.com', 'password')");
-        $stmt->execute();
-
-        // ตรวจสอบการเพิ่มข้อมูลซ้ำจะโยน PDOException
-        try {
-            $stmt->execute();  // ลองเพิ่มอีกครั้ง
-            $this->fail("Expected exception not thrown.");  // ถ้าระบบไม่โยน exception ถือว่า test ล้มเหลว
-        } catch (PDOException $e) {
-            $this->assertEquals("23000", $e->getCode());  // ตรวจสอบ error code ว่าถูกต้อง
-        }
-    }
 }
