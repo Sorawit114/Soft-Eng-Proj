@@ -39,5 +39,9 @@ jobs:
         run: |
           mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS aquarium;"
 
+      - name: Check MySQL Connection
+        run: |
+          mysql -h 127.0.0.1 -u root -proot -e "SHOW DATABASES;"
+
       - name: Run PHPUnit Tests
         run: vendor/bin/phpunit tests
