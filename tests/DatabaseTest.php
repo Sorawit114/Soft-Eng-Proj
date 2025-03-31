@@ -53,11 +53,22 @@ class DatabaseTest extends TestCase
     // ✅ ทดสอบการดึงข้อมูลทั้งหมด
     public function testFetchAllUsers()
     {
+        // เพิ่มข้อมูลตัวอย่างลงในฐานข้อมูล
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, position) VALUES (?, ?, ?, ?)");
+        $stmt->execute(['testUser', 'test@example.com', password_hash('testPass', PASSWORD_BCRYPT), 'user']);
+
+        // ดึงข้อมูลจำนวนผู้ใช้ออกมา
         $stmt = $this->pdo->query("SELECT COUNT(*) AS total FROM users");
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        // ตรวจสอบว่าจำนวนผู้ใช้ต้องมากกว่า 0
         $this->assertGreaterThan(0, $result['total']);
+
+        // ลบข้อมูลที่เพิ่มเข้ามาเพื่อความสะอาดของฐานข้อมูล
+        $stmt = $this->pdo->prepare("DELETE FROM users WHERE email = ?");
+        $stmt->execute(['test@example.com']);
     }
+
 
     // ✅ ทดสอบการลบข้อมูล
     public function testDeleteUser()
