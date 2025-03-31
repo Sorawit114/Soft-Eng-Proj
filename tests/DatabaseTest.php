@@ -6,42 +6,60 @@ class DatabaseTest extends TestCase
 {
     private $pdo;
 
-    // เชื่อมต่อฐานข้อมูลก่อนทำการทดสอบ
     protected function setUp(): void
     {
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', 'root');
+        // เปลี่ยนเป็นข้อมูลผู้ใช้ที่เชื่อมต่อกับฐานข้อมูล MySQL ของคุณ
+        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', ''); // ใช้ root และรหัสผ่านว่าง
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    // ทดสอบการเชื่อมต่อฐานข้อมูล
+    // ✅ ทดสอบการเชื่อมต่อฐานข้อมูล
     public function testDatabaseConnection()
     {
         $this->assertNotNull($this->pdo);
     }
 
-    // ทดสอบการเพิ่มข้อมูลลงในฐานข้อมูล
-    public function testInsertIntoDatabase()
+    // ✅ ทดสอบการเพิ่มข้อมูลลงใน users
+    public function testInsertUser()
     {
-        $stmt = $this->pdo->prepare("INSERT INTO tickets (name, price) VALUES ('Test Ticket', 100)");
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, position) VALUES ('testUser', 'test@example.com', 'testPass', 'user')");
         $stmt->execute();
-        
-        // ตรวจสอบว่าแถวใหม่ถูกเพิ่มลงในฐานข้อมูล
-        $stmt = $this->pdo->query("SELECT * FROM tickets WHERE name = 'Test Ticket'");
+
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE email = 'test@example.com'");
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        $this->assertEquals('Test Ticket', $result['name']);
-        $this->assertEquals(100, $result['price']);
+
+        $this->assertEquals('testUser', $result['username']);
+        $this->assertEquals('test@example.com', $result['email']);
     }
 
-    // ทดสอบการลบข้อมูลจากฐานข้อมูล
-    public function testDeleteFromDatabase()
+    // ✅ ทดสอบการอัปเดตข้อมูล
+    public function testUpdateUser()
     {
-        // ลบข้อมูลที่เราเพิ่มใน testInsertIntoDatabase
-        $this->pdo->query("DELETE FROM tickets WHERE name = 'Test Ticket'");
+        $this->pdo->query("UPDATE users SET username = 'updatedUser' WHERE email = 'test@example.com'");
 
-        $stmt = $this->pdo->query("SELECT * FROM tickets WHERE name = 'Test Ticket'");
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE email = 'test@example.com'");
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->assertFalse($result);  // ควรจะไม่มีแถวนี้ในฐานข้อมูลแล้ว
+        $this->assertEquals('updatedUser', $result['username']);
+    }
+
+    // ✅ ทดสอบการดึงข้อมูลทั้งหมด
+    public function testFetchAllUsers()
+    {
+        $stmt = $this->pdo->query("SELECT COUNT(*) AS total FROM users");
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertGreaterThan(0, $result['total']);
+    }
+
+    // ✅ ทดสอบการลบข้อมูล
+    public function testDeleteUser()
+    {
+        $this->pdo->query("DELETE FROM users WHERE email = 'test@example.com'");
+
+        $stmt = $this->pdo->query("SELECT * FROM users WHERE email = 'test@example.com'");
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->assertFalse($result);
     }
 }
-?>
