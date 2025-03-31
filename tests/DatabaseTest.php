@@ -8,19 +8,18 @@ class DatabaseTest extends TestCase
 
     protected function setUp(): void
     {
-        // เปลี่ยนไปใช้ root และไม่มีรหัสผ่าน (ตามค่าเริ่มต้นของ XAMPP)
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', '');
+        // เปลี่ยนเป็นการใช้ host 127.0.0.1 และรหัสผ่าน root
+        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', 'root');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-
-    // ✅ ทดสอบการเชื่อมต่อฐานข้อมูล
+    // ทดสอบการเชื่อมต่อฐานข้อมูล
     public function testDatabaseConnection()
     {
         $this->assertNotNull($this->pdo);
     }
 
-    // ✅ ทดสอบการเพิ่มข้อมูลลงใน users
+    // ทดสอบการเพิ่มข้อมูลลงใน users
     public function testInsertUser()
     {
         $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, position) VALUES ('testUser', 'test@example.com', 'testPass', 'user')");
@@ -33,7 +32,7 @@ class DatabaseTest extends TestCase
         $this->assertEquals('test@example.com', $result['email']);
     }
 
-    // ✅ ทดสอบการอัปเดตข้อมูล
+    // ทดสอบการอัปเดตข้อมูล
     public function testUpdateUser()
     {
         $this->pdo->query("UPDATE users SET username = 'updatedUser' WHERE email = 'test@example.com'");
@@ -44,7 +43,7 @@ class DatabaseTest extends TestCase
         $this->assertEquals('updatedUser', $result['username']);
     }
 
-    // ✅ ทดสอบการดึงข้อมูลทั้งหมด
+    // ทดสอบการดึงข้อมูลทั้งหมด
     public function testFetchAllUsers()
     {
         $stmt = $this->pdo->query("SELECT COUNT(*) AS total FROM users");
@@ -53,7 +52,7 @@ class DatabaseTest extends TestCase
         $this->assertGreaterThan(0, $result['total']);
     }
 
-    // ✅ ทดสอบการลบข้อมูล
+    // ทดสอบการลบข้อมูล
     public function testDeleteUser()
     {
         $this->pdo->query("DELETE FROM users WHERE email = 'test@example.com'");
