@@ -32,7 +32,7 @@ jobs:
           extensions: mbstring, bcmath, mysql
 
       - name: Install dependencies
-        run: composer install
+        run: composer install --no-interaction
 
       # ติดตั้ง wait-for-it
       - name: Install wait-for-it
