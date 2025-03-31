@@ -8,10 +8,11 @@ class DatabaseTest extends TestCase
 
     protected function setUp(): void
     {
-        // เปลี่ยนเป็นข้อมูลผู้ใช้ที่เชื่อมต่อกับฐานข้อมูล MySQL ของคุณ
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', ''); // ใช้ root และรหัสผ่านว่าง
+        // เปลี่ยนไปใช้ root และไม่มีรหัสผ่าน (ตามค่าเริ่มต้นของ XAMPP)
+        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', '');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
+
 
     // ✅ ทดสอบการเชื่อมต่อฐานข้อมูล
     public function testDatabaseConnection()
