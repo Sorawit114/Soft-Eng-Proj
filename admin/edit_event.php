@@ -4,7 +4,7 @@ include '../includes/navbar.php';
 
 if (!isset($_SESSION['session_id']) || $_SESSION['role'] !== 'a') {
     // ถ้าไม่มี session_id หรือ role ไม่ใช่ 'a' ให้ redirect ไปหน้า home
-    header("Location:  ../home/aquarium.php");
+    header("Location:  ../homepage/aquarium.php");
     exit();
 }
 // เชื่อมต่อฐานข้อมูล
@@ -63,7 +63,7 @@ if (!$event) {
   <!-- Header -->
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
         <div class="absolute top-5 left-5 z-50 flex items-center">
-            <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+            <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
         </div>
         <div class="absolute bottom-5 left-5 z-50">
             <a href="editinfo_ticket.php" class="inline-flex items-center space-x-2 text-white hover:underline">

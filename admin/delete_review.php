@@ -4,7 +4,7 @@ include '../includes/navbar.php';
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือไม่
 if (!isset($_SESSION['session_id']) || $_SESSION['role'] !== 'a') {
-    header("Location:  ../home/aquarium.php");
+    header("Location:  ../homepage/aquarium.php");
     exit;
 }
 

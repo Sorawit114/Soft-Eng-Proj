@@ -3,13 +3,13 @@ session_start();
 
 // ตรวจสอบ request method
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location:  ../home/aquarium.php");
+    header("Location:  ../homepage/aquarium.php");
     exit();
 }
 
 // ตรวจสอบการล็อกอิน
 if (!isset($_SESSION['session_id'])) {
-    header("Location:  ../home/aquarium.php");
+    header("Location:  ../homepage/aquarium.php");
     exit();
 }
 

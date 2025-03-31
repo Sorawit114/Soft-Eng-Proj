@@ -4,7 +4,7 @@ include '../includes/navbar.php';
 
 // หากยังไม่ล็อกอิน ให้ redirect ไปหน้า aquarium.php
 if (!isset($_SESSION['session_id'])) {
-  header("Location:  ../home/aquarium.php");
+  header("Location:  ../homepage/aquarium.php");
   die();
 }
 
@@ -47,7 +47,7 @@ if ($id === 0) {
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <!-- ลิงก์ Aquarium มุมบนซ้าย -->
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
   <br>

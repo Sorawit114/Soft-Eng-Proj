@@ -1,6 +1,6 @@
 <?php session_start();
 include '../includes/navbar.php';
-if(!isset($_SESSION['session_id'])){header("Location:../home/aquarium.php");die();}?>
+if(!isset($_SESSION['session_id'])){header("Location:../homepage/aquarium.php");die();}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,7 +37,7 @@ if(!isset($_SESSION['session_id'])){header("Location:../home/aquarium.php");die(
 
   <!-- ลิงก์ Aquarium มุมบนซ้าย -->
   <div class="absolute top-5 left-5 z-20">
-    <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+    <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
   </div>
 
   </header>

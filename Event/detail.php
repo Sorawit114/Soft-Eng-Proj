@@ -88,7 +88,7 @@
   <!-- Gradient Overlay: เฟดจาก mainBlue ไปเป็นโปร่งใส -->
   <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#040F53]"></div>
   <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
 
   <!-- ปุ่ม Back อยู่ด้านล่างซ้าย หลังจากเฟดเสร็จ -->

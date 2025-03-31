@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['slip'])) {
   <!-- Header (รูปพื้นหลัง) -->
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['slip'])) {
     </div>
 
     <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 justify-end">
-        <a href=" ../home/aquarium.php" 
+        <a href=" ../homepage/aquarium.php" 
            class="bg-white text-black px-6 py-2 rounded-md hover:bg-hoverBlue hover:text-white transition-colors">
           กลับสู่หน้าหลัก
         </a>

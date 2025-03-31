@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role'] = $row['position'];
 
             // เปลี่ยนเส้นทางไปยัง aquarium.php
-            header("Location: ../home/aquarium.php");
+            header("Location: ../homepage/aquarium.php");
             exit();
         } else {
             $_SESSION['error'] = "Invalid email or password.";

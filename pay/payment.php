@@ -4,7 +4,7 @@ include '../includes/navbar.php';
 
 // ตรวจสอบการล็อกอิน
 if (!isset($_SESSION['session_id'])) {
-  header("Location:  ../home/aquarium.php");
+  header("Location:  ../homepage/aquarium.php");
   die();
 }
 
@@ -70,7 +70,7 @@ $conn->close();
 <body class="font-poppins min-h-screen bg-mainBlue text-white">
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 

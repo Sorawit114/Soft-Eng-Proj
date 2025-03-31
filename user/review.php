@@ -4,7 +4,7 @@ include '../includes/navbar.php';
 
 // ตรวจสอบว่าผู้ใช้ล็อกอินหรือยัง
 if (!isset($_SESSION['session_id']) || !isset($_SESSION['id'])) {
-    header("Location: ../home/aquarium.php");
+    header("Location: ../homepage/aquarium.php");
     exit();
 }
 
@@ -34,7 +34,7 @@ $user_id = $_SESSION['id'];
 
 <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="../home/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
     </div>
   </header>
 
