@@ -1,6 +1,6 @@
 name: Run PHP Tests with PHPUnit
 
-on: 
+on:
   push:
     branches:
       - main
@@ -28,16 +28,25 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.1'
+          php-version: "8.1"
           extensions: mbstring, bcmath, mysql
 
       - name: Install dependencies
         run: composer install
 
+      # ติดตั้ง wait-for-it
+      - name: Install wait-for-it
+        run: |
+          curl -sSLo wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+          chmod +x wait-for-it.sh
+
+      # รอจนกว่า MySQL จะพร้อมใช้งาน
+      - name: Wait for MySQL to be ready
+        run: ./wait-for-it.sh 127.0.0.1:3306 --timeout=30 --strict -- echo "MySQL is up!"
+
       - name: Set up database
         run: |
           mysql -h 127.0.0.1 -u root -proot -e "CREATE DATABASE IF NOT EXISTS aquarium;"
-          mysql -h 127.0.0.1 -u root -proot aquarium < ./aquarium.sql
 
       - name: Run PHPUnit tests
         run: vendor/bin/phpunit --configuration phpunit.xml
