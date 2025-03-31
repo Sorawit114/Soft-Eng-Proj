@@ -8,7 +8,8 @@ class DatabaseTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', '');
+        // เปลี่ยนเป็นข้อมูลผู้ใช้ที่เชื่อมต่อกับฐานข้อมูล MySQL ของคุณ
+        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', ''); // ใช้ root และรหัสผ่านว่าง
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
@@ -68,7 +69,7 @@ class DatabaseTest extends TestCase
         // เพิ่มผู้ใช้แรก
         $stmt = $this->pdo->prepare("INSERT INTO users (email, password) VALUES ('duplicate_email@test.com', 'password')");
         $stmt->execute();
-    
+
         // ตรวจสอบการเพิ่มข้อมูลซ้ำจะโยน PDOException
         try {
             $stmt->execute();  // ลองเพิ่มอีกครั้ง
@@ -77,5 +78,4 @@ class DatabaseTest extends TestCase
             $this->assertEquals("23000", $e->getCode());  // ตรวจสอบ error code ว่าถูกต้อง
         }
     }
-    
 }
