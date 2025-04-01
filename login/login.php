@@ -64,7 +64,7 @@ if(isset($_SESSION['session_id'])){header("Location: ../homepage/aquarium.php");
       <!-- ตำแหน่งโลโก้มุมบนซ้าย -->
       <div class="absolute top-5 left-5" >
 
-        <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+        <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     
       </div>
     </div>
@@ -72,8 +72,8 @@ if(isset($_SESSION['session_id'])){header("Location: ../homepage/aquarium.php");
     <!-- ส่วนขวา: พื้นหลังสีน้ำเงินเข้ม + ฟอร์ม -->
     <!-- กำหนดความกว้างไว้คงที่ เพื่อเลย์เอาต์ดูคงที่ตามดีไซน์ -->
     <div
-      class="relative w-[450px] bg-mainBlue text-white flex flex-col h-full 
-             px-8 py-10 z-10 justify-center">
+      class="relative w-[600px] bg-mainBlue text-white flex flex-col h-full 
+             px-12 pl-20 py-15 z-10 justify-center">
       
       
       <!-- ข้อความต้อนรับ -->
@@ -81,14 +81,14 @@ if(isset($_SESSION['session_id'])){header("Location: ../homepage/aquarium.php");
         <h1 class="text-2xl font-bold uppercase mb-2">
           Welcome
         </h1>
-        <p class="mb-4">
+        <p class="mb-4 italic">
           Sign in to buy a ticket.
         </p>
       </div>
       
       <!-- กล่องฟอร์ม Sign in (พื้นหลังสีขาว) -->
-      <div class="bg-white text-gray-800 rounded-xl p-6 max-w-sm">
-        <h2 class="text-xl font-semibold text-mainBlue mb-4">
+      <div class="bg-white text-gray-800 rounded-xl p-14 max-w-sm">
+        <h2 class="text-2xl font-semibold text-mainBlue mb-4 text-center">
           Sign in
         </h2>
         <form action="verify.php" method="POST">
@@ -149,7 +149,7 @@ if(isset($_SESSION['session_id'])){header("Location: ../homepage/aquarium.php");
     <!-- เลเยอร์ Gradient เพื่อให้เฟดจากโปร่งใส -> สีน้ำเงิน -->
     <div
       class="pointer-events-none absolute top-0 bottom-0 
-             right-[450px] w-24
+             right-[600px] w-24
              bg-gradient-to-r from-transparent to-mainBlue z-10"
     ></div>
   </div>

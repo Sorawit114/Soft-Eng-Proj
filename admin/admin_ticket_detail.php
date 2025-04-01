@@ -72,11 +72,20 @@ if ($status === "อนุมัติ") {
 <body class="font-poppins bg-mainBlue text-white min-h-screen">
   <header class="relative h-32 bg-cover bg-center" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute top-5 left-5 z-10">
-      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
   </header>
-
+  <a href="javascript:history.back()" class="inline-flex items-center space-x-2 text-white hover:underline">
+      <!-- ไอคอนลูกศรซ้าย -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md-5" fill="none" 
+           viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" 
+              d="M15 19l-7-7 7-7" />
+      </svg>
+      <span>Back</span>
+    </a>
   <main class="flex items-center justify-center py-12 bg-mainBlue max-h-screen">
+    
   <div class="bg-white w-full max-w-3xl rounded-xl shadow-lg p-8 border border-gray-300">
   <!-- หัวข้อ -->
   <h2 class="text-lg font-semibold text-center mb-6 text-gray-800">

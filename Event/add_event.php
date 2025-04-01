@@ -13,13 +13,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // รับข้อมูลจากฟอร์ม
     $name = trim($_POST["name"]);
     $location = trim($_POST["location"]);
-    $activity = trim($_POST["activity"]);
+    $activities = isset($_POST["activity"]) ? $_POST["activity"] : []; // รับค่าจากฟอร์มที่เลือกหลายกิจกรรม
     $price = trim($_POST["price"]);
 
     // ตรวจสอบข้อมูลพื้นฐาน
     if (empty($name)) $errors[] = "Event name is required.";
     if (empty($location)) $errors[] = "Location is required.";
-    if (empty($activity)) $errors[] = "Activity is required.";
+    if (empty($activities)) $errors[] = "At least one activity is required."; // ตรวจสอบว่ามีกิจกรรมที่เลือก
     if (empty($price) || !is_numeric($price)) $errors[] = "Valid price is required.";
 
     // ตรวจสอบการอัปโหลดไฟล์รูป
@@ -60,15 +60,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 die("Connection failed: " . $conn->connect_error);
             }
 
+            // แปลงอาเรย์กิจกรรมเป็น string
+            $activities_str = implode(",", $activities);
+
             // บันทึกชื่อ event, ชื่อไฟล์รูป, location, activity, price ลงในตาราง events
-            $stmt = $conn->prepare("INSERT INTO events (name, image, location, activity, price) VALUES (?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssd", $name, $targetFile, $location, $activity, $price);
+            $stmt = $conn->prepare("INSERT INTO events (name, image, location, activity, price, description) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssd", $name, $targetFile, $location, $activities_str, $price, $description);
             if ($stmt->execute()) {
                 $success = "Event added successfully!";
             } else {
                 $errors[] = "Error: " . $stmt->error;
             }
-            header("Location:event.phpt");
+            header("Location:../admin/editinfo_ticket.php");
             $stmt->close();
             $conn->close();
         }

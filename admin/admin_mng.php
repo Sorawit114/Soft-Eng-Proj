@@ -88,7 +88,7 @@ $result = $conn->query($sql);
 
 <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-        <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+        <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
 </header>
 
@@ -113,6 +113,7 @@ $result = $conn->query($sql);
     </select>
     <button type="submit" class="bg-mainBlue text-white px-4 rounded">ค้นหา</button>
   </form> 
+
     <?php while ($row = $result->fetch_assoc()): ?>
       <div class="flex justify-between items-center bg-gray-200 px-6 py-4 mt-4 rounded">
         <div>
@@ -158,10 +159,57 @@ $result = $conn->query($sql);
 </main>
 
 <!-- Modal & Scripts -->
+<div id="roleModal" class="hidden fixed inset-0 bg-gray-500 text-mainBlue bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg w-96">
+        <h2 class="text-xl font-bold">Change Role</h2>
+        <form action="update_role.php" method="POST">
+            <input type="hidden" id="roleUserId" name="user_id">
+            <input type="hidden" id="currentRole" name="current_role">
+            
+            <div class="mt-4">
+                <label for="newRole">Current Role: <span id="currentRoleLabel" class="font-bold text-blue-500"></span></label>
+            </div>
+            
+            <div class="mt-4">
+                <label for="newRole">New Role:</label>
+                <select id="newRole" name="new_role" class="border p-2 mt-2">
+                    <option value="admin">Admin</option>
+                    <option value="member">Member</option>
+                </select>
+            </div>
+            
+            <div class="mt-4 flex justify-end">
+                <button type="button" onclick="closeRoleModal()" class="bg-gray-300 px-4 py-2 rounded-md">Close</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md ml-2">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal for Banning User -->
+<div id="banModal" class="hidden fixed inset-0 bg-gray-500 text-mainBlue bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg w-96">
+        <h2 class="text-xl font-bold">Ban User</h2>
+        <form action="update_role.php" method="POST">
+            <input type="hidden" id="banUserId" name="user_id">
+            <input type="hidden" name="action" value="ban">
+
+            <div class="mt-4">
+                <p>Are you sure you want to ban this user?</p>
+            </div>
+            
+            <div class="mt-4 flex justify-end">
+                <button type="button" onclick="closeBanModal()" class="bg-gray-300 px-4 py-2 rounded-md">Close</button>
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md ml-2">Ban User</button>
+            </div>
+        </form>
+    </div>
+</div>
 <script>
     function openRoleModal(id, currentRole) {
       document.getElementById('roleUserId').value = id;
       document.getElementById('currentRole').value = currentRole;
+      document.getElementById('currentRoleLabel').textContent = currentRole;
       document.getElementById('roleModal').classList.remove('hidden');
     }
     function closeRoleModal() {
@@ -176,6 +224,7 @@ $result = $conn->query($sql);
     function closeBanModal() {
         document.getElementById('banModal').classList.add('hidden');
     }
+    
 </script>
 
 </body>

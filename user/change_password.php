@@ -3,9 +3,9 @@ session_start();
 
 // เชื่อมต่อกับฐานข้อมูล
 $servername = "localhost";
-$username = "root";  // ใช้ชื่อผู้ใช้ฐานข้อมูลของคุณ
-$password = "";      // ใช้รหัสผ่านฐานข้อมูลของคุณ
-$dbname = "your_database";  // ใช้ชื่อฐานข้อมูลของคุณ
+$username = "root";  
+$password = "";      
+$dbname = "aquarium";  
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

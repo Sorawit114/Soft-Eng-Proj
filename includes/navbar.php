@@ -24,8 +24,8 @@
             </div>
           </div>
         <?php else: ?>
-          <a href="../register/register.php" class="text-lg hover:underline">Register</a>
-          <a href="../login/login.php" class="text-lg hover:underline">Sign In</a>
+          <a href="../register/register.php" class="text-2xl hover:underline">Register</a>
+          <a href="../login/login.php" class="text-2xl hover:underline">Sign In</a>
         <?php endif; ?>
       </div>
     </nav>

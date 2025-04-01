@@ -63,7 +63,7 @@ if (!$event) {
   <!-- Header -->
   <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
         <div class="absolute top-5 left-5 z-50 flex items-center">
-            <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+            <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
         </div>
         <div class="absolute bottom-5 left-5 z-50">
             <a href="editinfo_ticket.php" class="inline-flex items-center space-x-2 text-white hover:underline">
@@ -176,7 +176,7 @@ if (!$event) {
     confirmButton.addEventListener('click', function() {
         const selectedCount = ticketCountInput.value;
         // ส่งไปที่ add_ticket.php พร้อมข้อมูลที่เลือก
-        window.location.href = 'ticket/add_ticket.php?id=<?php echo $event['event_id']; ?>&count=' + selectedCount;
+        window.location.href = '../ticket/add_ticket.php?id=<?php echo $event['event_id']; ?>&count=' + selectedCount;
   });
 });
   </script>

@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['slip'])) {
     $slip_name = 'slip_' . uniqid() . '.' . pathinfo($_FILES['slip']['name'], PATHINFO_EXTENSION);
 
     // ย้ายไฟล์ไปยังโฟลเดอร์ uploads/
-    if (!move_uploaded_file($slip_tmp, "uploads/$slip_name")) {
+    if (!move_uploaded_file($slip_tmp, "../uploads/$slip_name")) {
         $uploadMessage = "เกิดข้อผิดพลาดในการอัปโหลดสลิป";
     } else {
         // บันทึกชื่อไฟล์ลงฐานข้อมูล
@@ -83,9 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['slip'])) {
 </head>
 <body class="font-poppins min-h-screen bg-mainBlue text-white">
   <!-- Header (รูปพื้นหลัง) -->
-  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
+  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('../image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
   </header>
 

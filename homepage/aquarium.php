@@ -13,9 +13,10 @@ $sql = "SELECT r.*, u.first_name, u.username, e.name AS event_name, e.image AS e
         FROM review r
         JOIN users u ON r.user_id = u.id
         JOIN events e ON r.event_id = e.event_id
-        ORDER BY r.created_at DESC LIMIT 3";  // ดึงรีวิวล่าสุด 3 อัน
+        WHERE r.rating BETWEEN 3 AND 5
+        ORDER BY RAND() LIMIT 4";
 $result = $conn->query($sql);
-
+ 
 if (!$result) {
     die("Error: " . $conn->error);
 }
@@ -46,13 +47,12 @@ if (!$result) {
 </head>
 <body class="bg-mainBlue text-white">
   <!-- Header Section -->
-  <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('../image/8929102.jpg');">
+  <header class="relative min-h-screen bg-fixed bg-center bg-cover bg-no-repeat text" style="background-image: url('../image/8929102.jpg');">
     <!-- Header Content -->
-    <div class="absolute inset-0 flex items-center pl-8">
-      <div>
-        <h1 class="text-5xl font-bold">Header Content</h1>
-        <p class="text-3xl">Content</p>
-      </div>
+    <div class="absolute inset-0 flex items-center justify-center pl-8">
+        <div>
+            <h1 class="text-6xl font-bold text-white">Equarium</h1>
+        </div>
     </div>
     <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#040F53] to-transparent"></div>
   </header>
@@ -61,7 +61,7 @@ if (!$result) {
   <main class="p-4 max-w-6xl mx-auto">
     <!-- Introduction Section -->
     <section class="my-8">
-      <div class="w-full p-10 border-4 border-white rounded-lg shadow-xl bg-cover bg-center text-white text-center" style="background-image: url('recommend-bg.jpg');">
+      <div class="w-full p-10 border-4 border-white rounded-lg shadow-xl bg-cover bg-center text-mainBlue text-center bg-white" style="background-image: url('recommend-bg.jpg');">
         <h2 class="font-kanit text-4xl font-bold drop-shadow-lg">แนะนำระบบ</h2>
         <p class="mt-4 text-lg font-light drop-shadow-md">
           สัมผัสประสบการณ์สุดพิเศษกับสัตว์น้ำหลากหลายชนิดที่ไม่เคยเห็นมาก่อน!
@@ -71,7 +71,7 @@ if (!$result) {
 
     <!-- จองตั๋ว Section -->
     <section class="py-16">
-      <a href="../event/Event.php" class="block w-full p-14 border-4 border-white bg-cover bg-center text-white text-center" style="background-image: url('../image/imgticket.png');">
+      <a href="../event/Event.php" class="block w-full p-14 rounded-xl bg-cover bg-center text-white text-center" style="background-image: url('../image/imgticket.png');">
         <h2 class="font-kanit text-4xl font-bold">จองตั๋ว</h2>
       </a>
 
@@ -105,24 +105,36 @@ if (!$result) {
 
       <!-- Recommend Section -->
       <section class="my-8">
-      <h2 class="text-5xl font-semibold">รีวิวล่าสุด</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-        
-        <?php while ($review = $result->fetch_assoc()): ?>
-          <div class="relative bg-white rounded-lg overflow-hidden shadow-lg">
-            <img src="<?php echo htmlspecialchars($review['event_image']); ?>" alt="Event Image" class="w-full h-40 object-cover">
-            <div class="p-4">
-              <h3 class="text-xl font-semibold"><?php echo htmlspecialchars($review['event_name']); ?></h3>
-              <p class="text-md text-black mb-4"><?php echo htmlspecialchars($review['first_name']); ?> - <?php echo date("d M Y", strtotime($review['created_at'])); ?></p>
-              <p class="text-gray-700"><?php echo htmlspecialchars($review['content']); ?></p>
-              <div class="mt-2 flex items-center">
-                <span class="text-yellow-500">⭐ <?php echo htmlspecialchars($review['rating']); ?></span>
-              </div>
+        <h2 class="text-5xl font-semibold">รีวิวล่าสุด</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+            <?php 
+            while ($review = $result->fetch_assoc()):
+                $event_name = isset($review['event_name']) ? htmlspecialchars($review['event_name']) : 'ไม่ระบุชื่อกิจกรรม';
+                $first_name = isset($review['first_name']) ? htmlspecialchars($review['first_name']) : 'ไม่ระบุชื่อ';
+                $event_image = isset($review['event_image']) ? htmlspecialchars($review['event_image']) : 'default.jpg';
+            ?>
+            <div class="relative bg-white rounded-lg overflow-hidden shadow-lg">
+                <img src="<?php echo $event_image; ?>" alt="Event Image" class="w-full h-40 object-cover">
+                <div class="p-4">
+                    <h3 class="text-xl font-semibold"><?php echo $event_name; ?></h3>
+                    <p class="text-md text-black mb-4"><?php echo $first_name; ?> - <?php echo date("d M Y", strtotime($review['created_at'])); ?></p>
+                    <p class="text-gray-700"><?php echo htmlspecialchars($review['content']); ?></p>
+                    <div class="mt-2 flex items-center space-x-2">
+                      <div class="flex">
+                        <?php 
+                          $rating = floor($review['rating']); // ปัดเศษลงเพื่อแสดงดาว
+                          for ($i = 0; $i < 5; $i++): ?>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="<?php echo $i < $rating ? 'yellow' : 'gray'; ?>" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                              <path d="M9.049 2.927a1 1 0 011.902 0l2.255 4.557 5.033.73a1 1 0 01.553 1.707l-3.63 3.538.858 5.034a1 1 0 01-1.451 1.054L10 14.347l-4.519 2.375a1 1 0 01-1.451-1.054l.858-5.034-3.63-3.538a1 1 0 01.553-1.707l5.033-.73 2.255-4.557z"/>
+                            </svg>
+                        <?php endfor; ?>
+                      </div>
+                      <span class="text-gray-500"><?php echo number_format($review['rating'], 1); ?></span>
+                    </div>
+                </div>
             </div>
-          </div>
-        <?php endwhile; ?>
-        
-      </div>
+            <?php endwhile; ?>
+        </div>
     </section>
     </section>
   </main>

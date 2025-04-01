@@ -33,7 +33,7 @@ if (!$ticket) {
 }
 
 // ตรวจสอบว่ามีการอัปโหลดสลิปหรือไม่
-$slip_image = $ticket['slip_image'] ? "<img src='uploads/" . htmlspecialchars($ticket['slip_image']) . "' alt='Slip Image' class='max-w-full max-h-80'>" : null;
+$slip_image = $ticket['slip_image'] ? "<img src='../uploads/" . htmlspecialchars($ticket['slip_image']) . "' alt='Slip Image' class='max-w-full max-h-80'>" : null;
 
 $conn->close();
 ?>
@@ -60,9 +60,9 @@ $conn->close();
 </head>
 <body class="font-poppins min-h-screen bg-mainBlue text-white">
   <!-- Header (รูปพื้นหลัง) -->
-  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
+  <header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('../image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
   </header>
 

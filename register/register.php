@@ -31,13 +31,13 @@ if(isset($_SESSION['session_id'])){header("Location:aquarium.php");die();}
 <body class="relative bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('../image/8929102.jpg'); font-family: 'Poppins', sans-serif;">
   <!-- ลิงก์ Aquarium ที่มุมบนซ้าย -->
   <div class="absolute top-5 left-5">
-    <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+    <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
   </div>
   
   <!-- Container จัดกลางทั้งแนวตั้งและแนวนอน -->
   <div class="flex items-center justify-center min-h-screen">
-    <div class="bg-white text-gray-800 rounded-xl p-6 max-w-sm shadow-lg">
-      <h2 class="text-xl font-semibold text-mainBlue mb-4">Register</h2>
+    <div class="bg-white text-gray-800 rounded-xl p-14 w-full max-w-lg shadow-lg">
+      <h2 class="text-3xl font-semibold text-mainBlue mb-4 text-center">Register</h2>
       <!-- ฟอร์มส่งข้อมูลไปที่ reg_save.php -->
       <form action="reg_save.php" method="POST">
   <!-- Username -->

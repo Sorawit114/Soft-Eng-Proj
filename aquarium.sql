@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2025 at 02:27 PM
+-- Generation Time: Apr 01, 2025 at 01:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,23 +35,24 @@ CREATE TABLE `events` (
   `activity` varchar(255) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `ticket_quantity` int(11) NOT NULL DEFAULT 0
+  `ticket_quantity` int(11) NOT NULL DEFAULT 0,
+  `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`event_id`, `name`, `image`, `location`, `activity`, `price`, `created_at`, `ticket_quantity`) VALUES
-(1, 'Sealife', 'uploads/1741937891_pexels-nguyen-tran-327588-1703516.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 500.00, '2025-03-14 07:38:11', 100),
-(4, 'Chiangmai Zoo Aquarium', 'uploads/1741938740_pexels-matej-bizjak-2148520448-30417733.jpg', 'ChiangMai', 'การแสดงสัตว์น้ำ', 350.00, '2025-03-14 07:52:20', 100),
-(6, 'Aquaria Phuket', 'uploads/1741944329_underwater.jpg', 'Phuket', 'ชมสัตว์น้ำ', 200.00, '2025-03-14 09:25:29', 100),
-(7, 'Sealife', 'uploads/1741944410_8929102.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 150.00, '2025-03-14 09:26:50', 100),
-(8, 'Aquaria Phuket', 'uploads/1741938496_pexels-pixabay-34809.jpg', 'Phuket', 'ชมสัตว์น้ำ โชว์ให้อาหารสัตว์น้ำ การแสดงสัตว์น้ำ', 600.00, '2025-03-14 07:48:16', 100),
-(9, 'Aquaria Phuket', 'uploads/1741944805_Male_whale_shark_at_Georgia_Aquarium.jpg', 'Phuket', 'ชมสัตว์น้ำ', 150.00, '2025-03-14 09:33:25', 100),
-(10, 'Sealife', 'uploads/1741945228_8929161.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 200.00, '2025-03-14 09:40:28', 100),
-(11, 'Aquaria Phuket', 'uploads/1741945363_pexels-w-w-299285-889929.jpg', 'Phuket', 'ชมสัตว์น้ำ', 250.00, '2025-03-14 09:42:43', 100),
-(12, 'Sealife', 'uploads/1741945471_pexels-pixabay-64219.jpg', 'Bangkok', 'ชมสัตว์น้ำ การแสดงสัตว์น้ำ', 300.00, '2025-03-14 09:44:31', 100);
+INSERT INTO `events` (`event_id`, `name`, `image`, `location`, `activity`, `price`, `created_at`, `ticket_quantity`, `description`) VALUES
+(1, 'Sealife', '../uploads/1741937891_pexels-nguyen-tran-327588-1703516.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 500.00, '2025-03-14 07:38:11', 100, ''),
+(4, 'Chiangmai Zoo Aquarium', '../uploads/1741938740_pexels-matej-bizjak-2148520448-30417733.jpg', 'ChiangMai', 'การแสดงสัตว์น้ำ', 350.00, '2025-03-14 07:52:20', 100, ''),
+(6, 'Aquaria Phuket', '../uploads/1741944329_underwater.jpg', 'Phuket', 'ชมสัตว์น้ำ', 200.00, '2025-03-14 09:25:29', 100, ''),
+(7, 'Sealife', '../uploads/1741944410_8929102.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 150.00, '2025-03-14 09:26:50', 100, ''),
+(8, 'Aquaria Phuket', '../uploads/1741938496_pexels-pixabay-34809.jpg', 'Phuket', 'ชมสัตว์น้ำ โชว์ให้อาหารสัตว์น้ำ การแสดงสัตว์น้ำ', 600.00, '2025-03-14 07:48:16', 95, ''),
+(9, 'Aquaria Phuket', '../uploads/1741944805_Male_whale_shark_at_Georgia_Aquarium.jpg', 'Phuket', 'ชมสัตว์น้ำ', 150.00, '2025-03-14 09:33:25', 100, ''),
+(10, 'Sealife', '../uploads/1741945228_8929161.jpg', 'Bangkok', 'ชมสัตว์น้ำ', 200.00, '2025-03-14 09:40:28', 100, ''),
+(11, 'Aquaria Phuket', '../uploads/1741945363_pexels-w-w-299285-889929.jpg', 'Phuket', 'ชมสัตว์น้ำ', 250.00, '2025-03-14 09:42:43', 100, ''),
+(12, 'Sealife', '../uploads/1741945471_pexels-pixabay-64219.jpg', 'Bangkok', 'ชมสัตว์น้ำ การแสดงสัตว์น้ำ', 300.00, '2025-03-14 09:44:31', 100, '');
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,9 @@ INSERT INTO `review` (`id`, `user_id`, `content`, `rating`, `created_at`, `event
 (8, 7, 'สนุกจริงๆเบย', 5, '2025-03-29 07:25:08', 3),
 (9, 1, 'ร้อนนิดๆ', 3, '2025-03-29 07:25:08', 11),
 (10, 7, 'ข้าวอร่อยมากกกก', 5, '2025-03-29 07:25:08', 8),
-(11, 6, 'น้องกระโดดกัดค่ะ ', 2, '2025-03-29 12:35:08', 7);
+(11, 6, 'น้องกระโดดกัดค่ะ ', 2, '2025-03-29 12:35:08', 7),
+(13, 6, 'staff สวยมาก', 5, '2025-04-30 12:35:08', 10),
+(14, 4, 'เดินเยอะมาก ได้เหงื่อดี', 5, '2025-04-03 12:35:08', 4);
 
 -- --------------------------------------------------------
 
@@ -108,7 +111,9 @@ INSERT INTO `ticket` (`id`, `user_id`, `event_id`, `ticket_code`, `ticket_date`,
 (12, 7, 12, '1220250415', '2025-04-15', 6, 1800.00, '2025-03-29 06:20:49', 'รอตรวจสอบ', NULL, NULL),
 (14, 7, 8, '0820250409', '2025-04-09', 2, 1200.00, '2025-03-29 06:26:49', 'ไม่อนุมัติ', NULL, NULL),
 (15, 7, 8, '0820250421', '2025-04-21', 3, 1800.00, '2025-03-29 06:51:07', 'อนุมัติ', 'slip_67e79873cfcc3.png', 'ยังไม่ได้ใช้งาน'),
-(16, 6, 6, '0820250525', '2025-05-25', 3, 1800.00, '2025-03-29 06:51:07', 'อนุมัติ', 'slip_67e79873cfcc3.png', 'ใช้งานแล้ว');
+(16, 6, 6, '0820250525', '2025-05-25', 3, 1800.00, '2025-03-29 06:51:07', 'อนุมัติ', 'slip_67e79873cfcc3.png', 'ใช้งานแล้ว'),
+(19, 7, 8, '0820250417', '2025-04-17', 3, 1800.00, '2025-03-31 14:27:13', 'รอตรวจสอบ', 'slip_67eaaa0a6d925.png', '0'),
+(22, 7, 8, '08202504212428', '2025-04-21', 2, 1200.00, '2025-03-31 14:43:44', 'รอตรวจสอบ', NULL, '0');
 
 -- --------------------------------------------------------
 
@@ -126,17 +131,17 @@ CREATE TABLE `users` (
   `email` varchar(150) NOT NULL,
   `password` varchar(255) NOT NULL,
   `position` char(1) NOT NULL DEFAULT 'm',
-  `creatde_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_520_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `gender`, `dob`, `email`, `password`, `position`, `creatde_at`) VALUES
+INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `gender`, `dob`, `email`, `password`, `position`, `created_at`) VALUES
 (1, 'Thanapon', 'Thanapon', 'Thungwaen', 'male', '2001-09-21', 'Sin@hotmail.com', '$2y$10$mEHrV/vCq85ZE7KRZI/ZKOhuCxmVAG0LHSbPLKwC4T3byEmdVSQEO', 'a', '2025-02-27 15:31:19'),
 (2, 'Sin', 'sdsd', 'sdsd', 'male', '2025-03-05', 'sss@hotmail.com', '$2y$10$FZS1QGIzSoO62FTIYPG0TeLNhPHy.hiCmYUUBOQA8io5wD.U9xsmW', 'a', '2025-02-27 16:15:26'),
-(4, 'D', NULL, NULL, NULL, NULL, 'D@hotmail.com', '$2y$10$3IZPLeaBuFWSGBgqCkEtWOXTEuvpznUCXqEAmTHg.gSLpIv3rV3tm', 'b', '2025-03-01 11:01:51'),
+(4, 'D', 'Dong', NULL, NULL, NULL, 'D@hotmail.com', '$2y$10$3IZPLeaBuFWSGBgqCkEtWOXTEuvpznUCXqEAmTHg.gSLpIv3rV3tm', 'm', '2025-03-01 11:01:51'),
 (6, 'Tachiki', 'Tachiki', 'Nomu', 'ชาย', '2003-06-18', 'Tachiki@gmail.com', '$2y$10$e14ymEpXO0KQ0uzi/VvDq.pNBY2WnHy.RKeo6HYgTi0ABky3PGgp.', 'm', '2025-03-29 05:48:51'),
 (7, 'M', 'Millennium', 'Blueeyes', 'ชาย', '1982-10-26', 'M@gmail.com', '$2y$10$rCQeYSdrUXbhNU0B5KL9AOZnXytYqdCk1LYM1Dq7gGr7Up5Pwxd8e', 'm', '2025-03-29 05:50:01');
 
@@ -155,7 +160,7 @@ ALTER TABLE `events`
 --
 ALTER TABLE `review`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `fk_review_user` (`user_id`);
 
 --
 -- Indexes for table `ticket`
@@ -186,13 +191,13 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -208,6 +213,7 @@ ALTER TABLE `users`
 -- Constraints for table `review`
 --
 ALTER TABLE `review`
+  ADD CONSTRAINT `fk_review_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --

@@ -43,7 +43,7 @@ if(!isset($_SESSION['session_id'])){
 
 
     <div class="absolute top-5 left-5 z-20 flex items-center">
-      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
   </header>
   

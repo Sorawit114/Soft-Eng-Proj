@@ -105,7 +105,7 @@ $conn->close();
   <header class="relative h-96 bg-fixed bg-center bg-cover bg-no-repeat" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
     <div class="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-[#001a4d] to-transparent"></div>
     <div class="absolute top-5 left-5 z-50 flex items-center">
-      <a href="../homepage/aquarium.php" class="text-white text-xl font-bold">Equarium</a>
+      <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
   </header>
 
@@ -161,79 +161,6 @@ $conn->close();
       </button>
     </form>
   </div>
-
-  <?php if(isset($_SESSION['role']) && $_SESSION['role'] == 'a'): ?>
-    <div class="flex justify-center mt-10">
-      <button id="openModal" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow">
-        Add Event
-      </button>
-    </div>
-  <?php endif; ?>
-
-  <!-- Modal: ซ่อนอยู่โดยค่าเริ่มต้น -->
-  <div id="modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-    <div class="bg-white text-black rounded-lg shadow-lg w-full max-w-lg p-6">
-      <h2 class="text-2xl font-bold mb-4">Add New Event</h2>
-      <form action="add_event.php" method="POST" enctype="multipart/form-data">
-        <div class="mb-4">
-          <label for="name" class="block font-semibold mb-1">Event Name</label>
-          <input type="text" id="name" name="name" class="w-full p-2 border rounded" placeholder="Event Name" required>
-        </div>
-        <div class="mb-4">
-          <label for="image" class="block font-semibold mb-1">Image File</label>
-          <input type="file" id="image" name="image" class="w-full p-2 border rounded" required>
-        </div>
-        <div class="mb-4">
-          <label for="location" class="block font-semibold mb-1">Location</label>
-          <input type="text" id="location" name="location" class="w-full p-2 border rounded" placeholder="Location" required>
-        </div>
-        <div class="mb-4">
-          <label for="activity" class="block font-semibold mb-1">Activity</label>
-          <input type="text" id="activity" name="activity" class="w-full p-2 border rounded" placeholder="Activity" required>
-        </div>
-        <div class="mb-4">
-          <label for="price" class="block font-semibold mb-1">Price</label>
-          <input type="number" step="0.01" id="price" name="price" class="w-full p-2 border rounded" placeholder="Price" required>
-        </div>
-        <div class="flex justify-end space-x-2">
-          <button type="button" id="closeModal" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">
-            Cancel
-          </button>
-          <button type="submit" class="bg-mainBlue hover:bg-hoverBlue text-white px-4 py-2 rounded">
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- JavaScript สำหรับเปิด/ปิด Modal -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const openModalBtn = document.getElementById('openModal');
-      const closeModalBtn = document.getElementById('closeModal');
-      const modal = document.getElementById('modal');
-
-      if (openModalBtn) {
-        openModalBtn.addEventListener('click', () => {
-          modal.classList.remove('hidden');
-        });
-      }
-
-      if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', () => {
-          modal.classList.add('hidden');
-        });
-      }
-
-      // ปิด modal เมื่อคลิกที่พื้นหลัง
-      modal.addEventListener('click', (e) => {
-        if(e.target === modal) {
-          modal.classList.add('hidden');
-        }
-      });
-    });
-  </script>
 
   <!-- Cards Section -->
   <div class="px-4 py-8 md:px-16 md:py-12 bg-mainBlue">

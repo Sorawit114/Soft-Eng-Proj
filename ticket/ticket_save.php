@@ -35,8 +35,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// ดึงราคาตั๋วจากตาราง events สำหรับ event_id ที่ระบุ
-$sql = "SELECT price FROM events WHERE event_id = ?";
+// ดึงราคาตั๋วและจำนวนตั๋วที่เหลือจากตาราง events สำหรับ event_id ที่ระบุ
+$sql = "SELECT price, ticket_quantity FROM events WHERE event_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $event_id);
 $stmt->execute();
@@ -46,21 +46,38 @@ if (!$eventData) {
     die("Event not found.");
 }
 $price_per_ticket = floatval($eventData['price']);
+$available_tickets = intval($eventData['ticket_quantity']); // จำนวนตั๋วที่เหลือ
+
+// ตรวจสอบว่าในระบบมีตั๋วเพียงพอหรือไม่
+if ($ticket_quantity > $available_tickets) {
+    die("Not enough tickets available.");
+}
+
 $total_price = $price_per_ticket * $ticket_quantity;
 $stmt->close();
 
 // สร้างรหัสตั๋วโดยอิงจาก event_id (2 หลัก) และวันที่จอง (ticket_date: YYYYMMDD)
-$ticket_code = sprintf("%02d", $event_id) . str_replace("-", "", $ticket_date);
+$ticket_code = sprintf("%02d", $event_id) . str_replace("-", "", $ticket_date) . rand(1000, 9999);
 
 // เตรียมคำสั่ง SQL เพื่อ insert ข้อมูลลงในตาราง ticket (เพิ่ม user_id)
 $sqlInsert = "INSERT INTO ticket (user_id, event_id, ticket_code, ticket_date, ticket_quantity, total_price, status, used)
-              VALUES (?, ?, ?, ?, ?, ?, 'รอตรวจสอบ')";
+              VALUES (?, ?, ?, ?, ?, ?, 'รอตรวจสอบ', 0)";
+
 $stmtInsert = $conn->prepare($sqlInsert);
 $stmtInsert->bind_param("iissid", $user_id, $event_id, $ticket_code, $ticket_date, $ticket_quantity, $total_price);
 
 if ($stmtInsert->execute()) {
     // ดึง ticket id ที่เพิ่ง insert ได้
     $ticket_id = $stmtInsert->insert_id;
+
+    // อัพเดตจำนวนตั๋วที่เหลือในอีเว้นต์ (ลดจำนวนตั๋วที่เหลือ)
+    $new_available_tickets = $available_tickets - $ticket_quantity;
+    $update_sql = "UPDATE events SET ticket_quantity = ? WHERE event_id = ?";
+    $update_stmt = $conn->prepare($update_sql);
+    $update_stmt->bind_param("ii", $new_available_tickets, $event_id);
+    $update_stmt->execute();
+    $update_stmt->close();
+
     // ส่ง event_id ไปยัง payment.php
     header("Location: ../pay/payment.php?event_id=" . $event_id);
     exit();
