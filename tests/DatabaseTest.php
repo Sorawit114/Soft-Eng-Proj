@@ -8,58 +8,83 @@ class DatabaseTest extends TestCase
 
     protected function setUp(): void
     {
-        // เปลี่ยนเป็นข้อมูลผู้ใช้ที่เชื่อมต่อกับฐานข้อมูล MySQL ของคุณ
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', ''); // ใช้ root และรหัสผ่านว่าง
+        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=aquarium', 'root', '');
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    // ✅ ทดสอบการเชื่อมต่อฐานข้อมูล
+    protected function tearDown(): void
+    {
+        $this->pdo = null;
+    }
+
     public function testDatabaseConnection()
     {
         $this->assertNotNull($this->pdo);
     }
 
-    // ✅ ทดสอบการเพิ่มข้อมูลลงใน users
     public function testInsertUser()
     {
-        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, position) VALUES ('testUser', 'test@example.com', 'testPass', 'user')");
-        $stmt->execute();
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, position) VALUES (?, ?, ?, ?)");
+        $stmt->execute(['secureUser', 'secure@example.com', password_hash('securePass', PASSWORD_BCRYPT), 'admin']);
 
-        $stmt = $this->pdo->query("SELECT * FROM users WHERE email = 'test@example.com'");
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute(['secure@example.com']);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->assertEquals('testUser', $result['username']);
-        $this->assertEquals('test@example.com', $result['email']);
+        $this->assertEquals('secureUser', $result['username']);
+        $this->assertTrue(password_verify('securePass', $result['password']));
     }
 
-    // ✅ ทดสอบการอัปเดตข้อมูล
     public function testUpdateUser()
     {
-        $this->pdo->query("UPDATE users SET username = 'updatedUser' WHERE email = 'test@example.com'");
+        $this->pdo->prepare("UPDATE users SET username = ? WHERE email = ?")
+            ->execute(['updatedUser', 'secure@example.com']);
 
-        $stmt = $this->pdo->query("SELECT * FROM users WHERE email = 'test@example.com'");
+        $stmt = $this->pdo->prepare("SELECT username FROM users WHERE email = ?");
+        $stmt->execute(['secure@example.com']);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->assertEquals('updatedUser', $result['username']);
     }
 
-    // ✅ ทดสอบการดึงข้อมูลทั้งหมด
     public function testFetchAllUsers()
     {
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, position) VALUES (?, ?, ?, ?)");
+        $stmt->execute(['testUser', 'test@example.com', password_hash('testPass', PASSWORD_BCRYPT), 'user']);
+
         $stmt = $this->pdo->query("SELECT COUNT(*) AS total FROM users");
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->assertGreaterThan(0, $result['total']);
+
+        $stmt = $this->pdo->prepare("DELETE FROM users WHERE email = ?");
+        $stmt->execute(['test@example.com']);
     }
 
-    // ✅ ทดสอบการลบข้อมูล
     public function testDeleteUser()
     {
-        $this->pdo->query("DELETE FROM users WHERE email = 'test@example.com'");
+        $this->pdo->prepare("DELETE FROM users WHERE email = ?")
+            ->execute(['secure@example.com']);
 
-        $stmt = $this->pdo->query("SELECT * FROM users WHERE email = 'test@example.com'");
+        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute(['secure@example.com']);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $this->assertFalse($result);
+    }
+
+    public function testDuplicateEmailInsertion()
+    {
+        $this->expectException(PDOException::class);
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, position) VALUES (?, ?, ?, ?)");
+        $stmt->execute(['dupUser', 'duplicate@example.com', 'dupPass', 'user']);
+        $stmt->execute(['dupUser2', 'duplicate@example.com', 'dupPass2', 'user']);
+    }
+
+    public function testInvalidInsert()
+    {
+        $this->expectException(PDOException::class);
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, position) VALUES (?, ?, ?, ?)");
+        $stmt->execute(['short', 'invalid-email', '123', 'user']);
     }
 }
