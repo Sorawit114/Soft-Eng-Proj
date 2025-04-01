@@ -1,0 +1,1 @@
+<?php header("Location: ../homepage/aquarium.php"); exit(); ?>

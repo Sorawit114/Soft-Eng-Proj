@@ -1,0 +1,34 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: aquarium-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: aquarium
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      LANG: C.UTF-8 
+      TZ: Asia/Bangkok 
+      MYSQL_CHARSET: utf8mb4 
+      command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./aquarium.sql:/docker-entrypoint-initdb.d/aquarium.sql
+    ports:
+      - "3307:3306"
+
+  php-apache:
+    build: .
+    container_name: aquarium-web
+    restart: always
+    volumes:
+      - ./public_html:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
