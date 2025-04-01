@@ -71,7 +71,7 @@ if ($status === "อนุมัติ") {
 </head>
 <body class="font-poppins bg-mainBlue text-white min-h-screen">
   <header class="relative h-32 bg-cover bg-center" style="background-image: url('../image/jellyfish-aquarium-black-background-glowing-white-amoled-3840x2160-2094.jpg');">
-    <div class="absolute top-5 left-5 z-10">
+    <div class="absolute top-5 left-5 z-50">
       <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
   </header>

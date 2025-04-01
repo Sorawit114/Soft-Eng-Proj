@@ -1,7 +1,9 @@
 <?php
 // เชื่อมต่อกับฐานข้อมูล
-include 'db_connection.php'; 
-
+$conn = new mysqli("localhost", "root", "", "aquarium");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 // ตรวจสอบว่า event_id ถูกส่งมาหรือไม่
 if (isset($_POST['event_id'])) {
     $event_id = $_POST['event_id'];

@@ -28,7 +28,7 @@ if ($review_id > 0) {
     // ลบรีวิวจากฐานข้อมูล
     if ($stmt->execute()) {
         // ถ้าลบสำเร็จ, ให้กลับไปที่หน้าแอดมินจัดการรีวิว
-        header("Location: admin_mng.php");
+        header("Location: admin_mng.php?tab=reviews");
         exit;
     } else {
         // ถ้ามีข้อผิดพลาด

@@ -42,7 +42,9 @@ $sql_reviews = "SELECT r.*, u.username, e.name AS event_name
                 FROM review r
                 JOIN users u ON r.user_id = u.id
                 JOIN events e ON r.event_id = e.event_id";
+
 $result_reviews = $conn->query($sql_reviews);
+
 
 // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
 $result = $conn->query($sql);
@@ -65,9 +67,19 @@ $result = $conn->query($sql);
         },
       },
     }
+    function checkTabFromStorage() {
+        // ตรวจสอบว่า sessionStorage มีค่า tab หรือไม่
+        const lastTab = sessionStorage.getItem('lastTab');
 
+        if (lastTab === 'reviews') {
+            toggleTab('reviews');  // เปิดแท็บรีวิว
+        } else {
+            toggleTab('users');  // เปิดแท็บผู้ใช้
+        }
+    }
     // ฟังก์ชันสลับแท็บ
     function toggleTab(tab) {
+      sessionStorage.setItem('lastTab', tab);
         if (tab === 'users') {
             document.getElementById('users-tab').classList.remove('hidden');
             document.getElementById('reviews-tab').classList.add('hidden');
@@ -82,6 +94,7 @@ $result = $conn->query($sql);
             document.getElementById('tab-users').classList.add('bg-gray-200', 'text-gray-700');
         }
     }
+    window.onload = checkTabFromStorage;
   </script>
 </head>
 <body class="bg-mainBlue text-white font-poppins min-h-screen">
@@ -165,7 +178,8 @@ $result = $conn->query($sql);
         <form action="update_role.php" method="POST">
             <input type="hidden" id="roleUserId" name="user_id">
             <input type="hidden" id="currentRole" name="current_role">
-            
+            <input type="hidden" name="action" value="update"> <!-- Ensure action is set -->
+
             <div class="mt-4">
                 <label for="newRole">Current Role: <span id="currentRoleLabel" class="font-bold text-blue-500"></span></label>
             </div>

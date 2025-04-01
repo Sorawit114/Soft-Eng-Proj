@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include '../includes/navbar.php';
 // ตรวจสอบการล็อกอิน
 if (!isset($_SESSION['session_id'])) {
     header("Location:  ../homepage/aquarium.php");
@@ -77,7 +77,7 @@ $conn->close();
       <!-- การ์ด 1: QR Code และข้อมูลการโอน -->
       <div class="bg-white text-black rounded p-6 flex flex-col items-center">
         <h2 class="text-xl font-semibold mb-4 text-mainBlue">ชำระผ่านธนาคาร</h2>
-        <img src="image/qr.png" alt="QR Code" class="w-48 mb-4" />
+        <img src="../image/qr.png" alt="QR Code" class="w-48 mb-4" />
         <div class="text-center">
           <p class="font-semibold">KBank</p>
           <p>เลขบัญชี: 123-4567890</p>

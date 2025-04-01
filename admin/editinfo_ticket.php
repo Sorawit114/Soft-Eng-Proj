@@ -132,7 +132,7 @@ $result = $conn->query($sql);
                         <button type="button" onclick="window.location.href='edit_event.php?id=<?php echo $event['event_id']; ?>'" class="w-32 h-10 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-full">
                             แก้ไข
                         </button>
-                        <form action="delete_event.php" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบอีเว้นต์นี้?');">
+                        <form action="../event/delete-event.php" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบอีเว้นต์นี้?');">
                             <input type="hidden" name="event_id" value="<?php echo $event['event_id']; ?>">
                             <button type="submit" class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full w-32">ลบ</button>
                     </form>

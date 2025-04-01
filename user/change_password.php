@@ -15,10 +15,11 @@ if ($conn->connect_error) {
 
 // ตรวจสอบการส่งข้อมูลจากฟอร์ม
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // รับ user_id จากฟอร์ม
+    $user_id = $_POST['user_id']; // รับ user_id จากฟอร์ม
     $old_password = $_POST['old_password'];
     $new_password = $_POST['new_password'];
     $confirm_password = $_POST['confirm_password'];
-    $user_id = $_SESSION['session_id']; // รับ user_id จาก session
 
     // ตรวจสอบว่า new password กับ confirm password ตรงกัน
     if ($new_password !== $confirm_password) {
@@ -63,6 +64,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error'] = "User not found.";
         }
         $stmt->close();
+    } else {
+        $_SESSION['error'] = "Database query error.";
     }
 
     // รีไดเร็กต์กลับไปที่หน้า change_password

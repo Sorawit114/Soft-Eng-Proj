@@ -62,10 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             // แปลงอาเรย์กิจกรรมเป็น string
             $activities_str = implode(",", $activities);
-
+            $description = $_POST['description'] ?? 'No description';
+            
             // บันทึกชื่อ event, ชื่อไฟล์รูป, location, activity, price ลงในตาราง events
             $stmt = $conn->prepare("INSERT INTO events (name, image, location, activity, price, description) VALUES (?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssd", $name, $targetFile, $location, $activities_str, $price, $description);
+            $stmt->bind_param("ssssds", $name, $targetFile, $location, $activities_str, $price, $description);
+
             if ($stmt->execute()) {
                 $success = "Event added successfully!";
             } else {
