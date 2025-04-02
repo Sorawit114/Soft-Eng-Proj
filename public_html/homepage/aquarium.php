@@ -63,24 +63,26 @@ if (!$result) {
     <section class="my-8">
       <div class="w-full p-4 border-4 border-white rounded-lg shadow-xl bg-cover bg-center text-mainBlue text-center bg-white">
         <!-- Row 3 Parts with Dividers -->
+        <p class="text-5xl">สำรวจฟีเจอร์หลักของเว็บไซต์เรา!</p>
         <div class="flex space-x-4 mt-4">
+          
           <div class="flex-1 text-center flex flex-col justify-center items-center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
               </svg>
-            <p>จองตั๋วเข้าชม</p>
+            <p>สำรองที่นั่งล่วงหน้าได้ง่าย ๆ</p>
           </div>
           <div class="flex-1 text-center flex flex-col justify-center items-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
           </svg>
-            <p>ดูข้อมูลสถานที่</p>
+            <p>ค้นหาข้อมูลเกี่ยวกับสถานที่และบริการต่าง ๆ</p>
           </div>
           <div class="flex-1 text-center flex flex-col justify-center items-center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-10 ">
             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
-            <p>รีวิวการเข้าชม</p>
+            <p>อ่านรีวิวจากผู้ใช้จริงหรือเขียนรีวิวของคุณ</p>
           </div>
         </div>
       </div>

@@ -27,7 +27,7 @@ $stmt->bind_param("i", $ticket_id);
 $success = $stmt->execute();
 
 if ($success) {
-    header("Location: checkin.php?checked=1");
+    header("Location: Checkin.php?checked=1");
     exit;
 } else {
     echo "Error updating ticket: " . $conn->error;

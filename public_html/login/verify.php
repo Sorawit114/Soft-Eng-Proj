@@ -12,15 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: login.php");
         exit();
     }
-
-    // ตั้งค่าการเชื่อมต่อฐานข้อมูล
-    $servername = "localhost";
-    $dbUsername = "root";
-    $dbPassword = "";
-    $dbname = "aquarium"; // เปลี่ยนเป็นชื่อฐานข้อมูลที่คุณใช้
-
     // สร้างการเชื่อมต่อ
-    $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+    $conn = new mysqli('mysql', 'user', 'password', 'aquarium');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }

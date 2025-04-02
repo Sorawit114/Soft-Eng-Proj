@@ -111,7 +111,7 @@ $conn->close();
 
   <!-- Search Bar -->
   <div class="flex justify-center mt-4">
-    <form action="event.php" method="GET" class="bg-white text-[#001a4d] px-4 py-2 inline-flex items-center space-x-4 rounded-lg max-w-3xl w-auto mx-auto shadow">
+    <form action="Event.php" method="GET" class="bg-white text-[#001a4d] px-4 py-2 inline-flex items-center space-x-4 rounded-lg max-w-3xl w-auto mx-auto shadow">
       <!-- Activity -->
       <div class="flex items-center space-x-1">
         <span class="font-semibold">Activity:</span>
@@ -216,7 +216,7 @@ $conn->close();
 
             <div class="event-card__buttons mt-auto flex flex-wrap justify-end gap-2">
               <!-- ปุ่ม Review -->
-              <a href="../event/user_review.php?id=<?php echo $events[$i]['event_id']; ?>" 
+              <a href="user_review.php?id=<?php echo $events[$i]['event_id']; ?>" 
                 class="event-card__button px-3 py-1 rounded"
                 style="background-color: #D8AC34;">
                 Review

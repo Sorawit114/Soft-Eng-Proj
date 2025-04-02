@@ -17,7 +17,7 @@
                 <a href="../admin/editinfo_ticket.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Edit Info & Ticket</a>
                 <a href="../user/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Sign Out</a>
               <?php else: ?>
-                <a href="../user/user.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">User</a>
+                <a href="../user/user.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">My Profile</a>
                 <a href="../user/myticket.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">My Ticket</a>
                 <a href="../user/logout.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-hoverBlue hover:text-white" role="menuitem">Sign Out</a>
               <?php endif; ?>

@@ -2,9 +2,9 @@
 session_start();
 
 // เชื่อมต่อกับฐานข้อมูล
-$servername = "localhost";
-$username = "root";  
-$password = "";      
+$servername = "mysql";
+$username = "user";  
+$password = "password";      
 $dbname = "aquarium";  
 
 $conn = new mysqli($servername, $username, $password, $dbname);

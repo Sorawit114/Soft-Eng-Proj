@@ -14,6 +14,14 @@ if ($id === 0) {
   die("Invalid event ID.");
 }
 
+if (isset($_SESSION['error_message'])) {
+    // แสดงข้อความจาก session
+    echo "<div class='error-message'>" . htmlspecialchars($_SESSION['error_message']) . "</div>";
+    
+    // ลบข้อความหลังแสดงแล้ว เพื่อไม่ให้แสดงซ้ำ
+    unset($_SESSION['error_message']);
+}
+
 // ดึงข้อมูล event ตาม id
 $sql = "SELECT * FROM events WHERE event_id = ?";
 $stmt = $conn->prepare($sql);

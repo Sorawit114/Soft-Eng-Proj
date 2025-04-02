@@ -8,7 +8,7 @@ $dbPassword  = "";
 $dbname      = "aquarium"; // ปรับตามชื่อฐานข้อมูลที่คุณใช้
 
 // สร้างการเชื่อมต่อ
-$conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+$conn = new mysqli('mysql', 'user', 'password', 'aquarium');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }

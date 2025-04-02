@@ -174,9 +174,13 @@ if (!$event) {
 
     // ยืนยันการเลือก
     confirmButton.addEventListener('click', function() {
-        const selectedCount = ticketCountInput.value;
+        const selectedCount = parseInt(ticketCountInput.value);
         // ส่งไปที่ add_ticket.php พร้อมข้อมูลที่เลือก
-        window.location.href = '../ticket/add_ticket.php?id=<?php echo $event['event_id']; ?>&count=' + selectedCount;
+	if (selectedCount !==0){
+	        window.location.href = '../ticket/add_ticket.php?id=<?php echo $event['event_id']; ?>&count=' + selectedCount;
+	}else{
+		alert("จำนวนตั๋วต้องไม่เป็น 0");
+	}
   });
 });
   </script>

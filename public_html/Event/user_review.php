@@ -87,7 +87,7 @@ $conn->close();
       <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
     <div class="absolute bottom-5 left-5 z-50">
-      <a href="javascript:history.back()" class="inline-flex items-center space-x-2 text-white hover:underline">
+      <a href="Event.php" class="inline-flex items-center space-x-2 text-white hover:underline">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
         </svg>

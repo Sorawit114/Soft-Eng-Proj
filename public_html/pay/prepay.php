@@ -7,7 +7,6 @@ if (!isset($_SESSION['session_id'])) {
   header("Location:  ../homepage/aquarium.php");
   die();
 }
-
 // ดึงค่า id จาก URL
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if ($id === 0) {

@@ -37,7 +37,7 @@ CREATE TABLE `events` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `ticket_quantity` int(11) NOT NULL DEFAULT 0,
   `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `events`
@@ -67,7 +67,7 @@ CREATE TABLE `review` (
   `rating` int(11) NOT NULL CHECK (`rating` between 1 and 5),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `event_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `review`
@@ -98,7 +98,7 @@ CREATE TABLE `ticket` (
   `status` varchar(50) DEFAULT 'รอตรวจสอบ',
   `slip_image` varchar(255) DEFAULT NULL,
   `used` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `ticket`
@@ -130,7 +130,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `position` char(1) NOT NULL DEFAULT 'm',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARACTER SET utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`

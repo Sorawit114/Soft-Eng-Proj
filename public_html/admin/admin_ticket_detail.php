@@ -96,8 +96,8 @@ if ($status === "อนุมัติ") {
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     <!-- สลิป -->
     <div class="md:col-span-2 bg-gray-100 h-80 flex items-center justify-center rounded-md overflow-hidden">
-      <?php if (!empty($ticket['slip_image'])): ?>
-        <img src="uploads/<?php echo htmlspecialchars($ticket['slip_image']); ?>" 
+      <?php if (!empty($ticket["slip_image"])): ?>
+        <img src='../uploads/<?php echo htmlspecialchars($ticket["slip_image"]); ?>' 
              alt="สลิป" 
              class="object-contain max-h-full max-w-full" />
       <?php else: ?>

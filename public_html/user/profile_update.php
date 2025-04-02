@@ -23,13 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // ตั้งค่าการเชื่อมต่อฐานข้อมูล
-    $servername = "localhost";
-    $dbUsername = "root";
-    $dbPassword = "";
-    $dbname     = "aquarium"; // ชื่อฐานข้อมูล
-
-    $conn = new mysqli($servername, $dbUsername, $dbPassword, $dbname);
+    $conn = new mysqli('mysql', 'user', 'password', 'aquarium');
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }

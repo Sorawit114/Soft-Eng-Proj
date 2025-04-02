@@ -50,7 +50,8 @@ $available_tickets = intval($eventData['ticket_quantity']); // จำนวน�
 
 // ตรวจสอบว่าในระบบมีตั๋วเพียงพอหรือไม่
 if ($ticket_quantity > $available_tickets) {
-    die("Not enough tickets available.");
+    header("Location: ticket.php?error=" . urlencode("Not enough tickets available."));
+    exit();
 }
 
 $total_price = $price_per_ticket * $ticket_quantity;

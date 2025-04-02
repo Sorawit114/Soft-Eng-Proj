@@ -187,8 +187,8 @@ $result = $conn->query($sql);
             <div class="mt-4">
                 <label for="newRole">New Role:</label>
                 <select id="newRole" name="new_role" class="border p-2 mt-2">
-                    <option value="admin">Admin</option>
-                    <option value="member">Member</option>
+                    <option value="a">Admin</option>
+                    <option value="m">Member</option>
                 </select>
             </div>
             

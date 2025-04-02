@@ -36,10 +36,14 @@ if ($action === 'add') {
     // ลดจำนวนตั๋ว
     $new_quantity = $event['ticket_quantity'] - $count;
     if ($new_quantity < 0) {
-        die("Cannot subtract more tickets than available.");
+        $new_quantity = 0;
     }
 } else {
     die("Invalid action.");
+}
+
+if ($new_quantity < 0) {
+    $new_quantity = 0;  // แก้ไขกรณีที่ยังติดลบ
 }
 
 // อัปเดตจำนวนตั๋ว
@@ -48,13 +52,9 @@ $stmtUpdate = $conn->prepare($sqlUpdate);
 $stmtUpdate->bind_param("ii", $new_quantity, $event_id);
 $stmtUpdate->execute();
 
-if ($stmtUpdate->affected_rows > 0) {
     // Redirect back to event page after update
-    header("Location: ../admin/edit_event.php?id=" . $event_id);
-    exit();
-} else {
-    echo "Error updating ticket quantity.";
-}
+header("Location: ../admin/edit_event.php?id=" . $event_id);
+exit();
 
 $stmtUpdate->close();
 $conn->close();

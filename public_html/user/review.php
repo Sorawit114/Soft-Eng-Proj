@@ -9,6 +9,9 @@ if (!isset($_SESSION['session_id']) || !isset($_SESSION['id'])) {
 }
 
 $user_id = $_SESSION['id'];
+$ticket_id = isset($_GET['ticket_id']) ? $_GET['ticket_id'] : '';
+$event_id = isset($_GET['event_id']) ? $_GET['event_id'] : '';
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +35,7 @@ $user_id = $_SESSION['id'];
 </head>
 <body class="bg-mainBlue text-white font-poppins min-h-screen">
 
-<header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('image/8929102.jpg');">
+<header class="relative h-32 bg-center bg-cover bg-no-repeat" style="background-image: url('../image/8929102.jpg');">
     <div class="absolute top-5 left-5 z-50 flex items-center">
       <a href="../homepage/aquarium.php" class="text-white text-3xl font-bold">Equarium</a>
     </div>
@@ -90,7 +93,7 @@ $user_id = $_SESSION['id'];
 
     <!-- Hidden input to store the rating -->
     <input type="hidden" name="rating" id="ratingInput" required />
-    <input type="hidden" name="event_id" id="event_id" required />
+    <input type="hidden" name="event_id" id="event_id" value="<?php echo $event_id; ?>" required />
   </label>
 
   <label class="block">
@@ -104,7 +107,7 @@ $user_id = $_SESSION['id'];
 <script>
   const stars = document.querySelectorAll('.star'); // Get all star elements
   const ratingInput = document.getElementById('ratingInput'); // Hidden input for rating
-  let selectedRating = 0;
+  let selecctedRating = 0;
 
   stars.forEach(star => {
     star.addEventListener('click', () => {
@@ -122,6 +125,11 @@ $user_id = $_SESSION['id'];
         star.classList.remove('text-yellow-500'); // Remove highlight from non-selected stars
       }
     });
+  }
+  
+  if (ratingInput.value){
+   selectedRating = parseInt(ratingInput.value);
+    updateStars(selectedRating);
   }
 </script>
 </body>
