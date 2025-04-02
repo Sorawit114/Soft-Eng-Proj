@@ -8,7 +8,7 @@ RUN docker-php-ext-install mysqli
 COPY ./public_html/ /var/www/html/
 
 # ตั้งค่า ServerName ให้กับ Apache
-RUN echo "ServerName localhost" > /etc/apache2/conf-available/servername.conf && a2enconf servername
+RUN echo "ServerName mysql" > /etc/apache2/conf-available/servername.conf && a2enconf servername
 
 # เปิดใช้งาน mod_rewrite ของ Apache (หากต้องการใช้งาน URL rewriting)
 RUN a2enmod rewrite

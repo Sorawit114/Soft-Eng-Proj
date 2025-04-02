@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-// ตั้งค่าการเชื่อมต่อฐานข้อมูล
-$servername  = "localhost";
-$dbUsername  = "root";
-$dbPassword  = "";
-$dbname      = "aquarium"; // ปรับตามชื่อฐานข้อมูลที่คุณใช้
-
 // สร้างการเชื่อมต่อ
 $conn = new mysqli('mysql', 'user', 'password', 'aquarium');
 if ($conn->connect_error) {

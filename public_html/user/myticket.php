@@ -226,7 +226,7 @@ $conn->close();
                        2.25 0 0 0 2.25-2.25V15m3 
                        0 3-3m0 0-3-3m3 3H9" />
                 </svg>
-                Logout
+                Sign out
               </a>
             </li>
           </ul>

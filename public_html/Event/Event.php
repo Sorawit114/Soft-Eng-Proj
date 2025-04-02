@@ -1,6 +1,7 @@
 <?php
 session_start();
 include '../includes/navbar.php';
+
 // รับค่า search parameters จาก GET
 $activity = isset($_GET['activity']) ? trim($_GET['activity']) : '';
 $province = isset($_GET['province']) ? trim($_GET['province']) : '';
@@ -12,19 +13,20 @@ $params = [];
 $types = '';
 
 if ($activity !== '') {
-  // แยกคำโดยใช้ช่องว่างหรือ comma
-  $keywords = preg_split('/[\s,]+/', $activity);
-  foreach ($keywords as $keyword) {
-      if ($keyword !== '') {
-          $conditions[] = "activity LIKE ?";
-          $params[] = "%" . $keyword . "%";
-          $types .= 's';
-      }
-  }
+    // แยกคำโดยใช้ช่องว่างหรือ comma
+    $keywords = preg_split('/[\s,]+/', $activity);
+    foreach ($keywords as $keyword) {
+        if ($keyword !== '') {
+            $conditions[] = "activity LIKE ?";
+            $params[] = "%" . $keyword . "%";
+            $types .= 's';
+        }
+    }
 }
 
 if ($province !== '') {
-    $conditions[] = "location = ?";
+    // ตรวจสอบว่า $province ที่ได้รับมานั้นตรงกับค่าที่เก็บในฐานข้อมูล
+    $conditions[] = "province = ?";  // ใช้ "province" สำหรับกรองข้อมูล
     $params[] = $province;
     $types .= 's';
 }
@@ -70,9 +72,17 @@ if ($result->num_rows > 0) {
         $events[] = $row;
     }
 }
+
+// ดึงจังหวัดที่มีจากฐานข้อมูล
+$province_sql = "SELECT DISTINCT province FROM events";
+$province_result = $conn->query($province_sql);
+
 $stmt->close();
 $conn->close();
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,16 +141,17 @@ $conn->close();
         <span class="font-semibold">Province:</span>
         <select name="province" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
           <option value="" <?php if($province == '') echo "selected"; ?>>all</option>
-          <option value="bangkok" <?php if($province == 'bangkok') echo "selected"; ?>>Bangkok</option>
-          <option value="phuket" <?php if($province == 'phuket') echo "selected"; ?>>Phuket</option>
-          <option value="chiangmai" <?php if($province == 'chiangmai') echo "selected"; ?>>Chiang Mai</option>
+          <?php while ($row = $province_result->fetch_assoc()): ?>
+            <option value="<?php echo $row['province']; ?>" <?php if($province == $row['province']) echo "selected"; ?>>
+              <?php echo htmlspecialchars($row['province']); ?>
+            </option>
+          <?php endwhile; ?>
         </select>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </div>
 
-      <!-- Price: ลบ option "all" ออก -->
       <div class="flex items-center space-x-1">
         <span class="font-semibold">Price:</span>
         <select name="price" class="bg-transparent border-b border-[#001a4d] focus:outline-none focus:border-blue-500 appearance-none px-1">
@@ -152,11 +163,10 @@ $conn->close();
         </svg>
       </div>
 
-      <!-- ปุ่มไอคอนค้นหา -->
+      <!-- Search Button -->
       <button type="submit" class="ml-2 text-[#001a4d] hover:text-blue-700">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 5.25 5.25a7.5 7.5 0 0 0 11.4 11.4z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 5.25 5.25a7.5 7.5 0 0 0 11.4 11.4z" />
         </svg>
       </button>
     </form>
@@ -177,14 +187,14 @@ $conn->close();
                  class="w-full h-full object-cover">
           </div>
           <div class="event-card__body p-4 flex flex-col flex-1">
-          <div class="flex flex-row space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <div class="flex flex-row space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                     </svg>
-            <p class="mb-1">
-              Location: <?php echo htmlspecialchars($events[$i]['location']); ?>
-            </p>
+              <p class="mb-1">
+                Location: <?php echo htmlspecialchars($events[$i]['location']); ?>
+              </p>
             </div>
             <h3 class="event-card__title text-xl font-bold text-[#001a4d] mb-2">
               <?php echo htmlspecialchars($events[$i]['name']); ?>
@@ -241,3 +251,4 @@ $conn->close();
   </footer>
 </body>
 </html>
+

@@ -15,6 +15,10 @@ if ($conn->connect_error) {
 
 $sql = "SELECT event_id, name, image FROM events";
 $result = $conn->query($sql);
+
+$province_sql = "SELECT * FROM provinces";
+$province_result = $conn->query($province_sql);
+$conn->close();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,6 +101,22 @@ $result = $conn->query($sql);
                 </div>
             </div>
 
+            <!-- Province -->
+            <div class="mb-4">
+                <label for="province" class="block font-semibold mb-1">Province</label>
+                <select id="province" name="province" class="w-full p-2 border rounded" required>
+                    <option value="">Select Province</option>
+                    <?php
+                    if ($province_result->num_rows > 0) {
+                        while ($row = $province_result->fetch_assoc()) {
+                            echo "<option value='" . $row['province_id'] . "'>" . $row['province_name'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+
+
             <!-- Price -->
             <div class="mb-4">
                 <label for="price" class="block font-semibold mb-1">Price</label>
@@ -120,32 +140,28 @@ $result = $conn->query($sql);
             </div>
         </form>
     </div>
-  </div>
-        <div class="space-y-4">
-            <?php while ($event = $result->fetch_assoc()): ?>
-                <div class="flex items-center bg-white p-4 rounded-lg shadow-lg ">
-                    <img src="<?php echo htmlspecialchars($event['image']); ?>" alt="<?php echo htmlspecialchars($event['name']); ?>" class="w-32 h-32 object-cover rounded-lg mr-4">
-                    <div class="flex-1">
-                        <h3 class="text-xl font-semibold text-black"><?php echo htmlspecialchars($event['name']); ?></h3>
-                    </div>
-                    <div class="flex flex-row space-x-2 px-5">
-                        <button type="button" onclick="window.location.href='edit_event.php?id=<?php echo $event['event_id']; ?>'" class="w-32 h-10 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-full">
-                            แก้ไข
-                        </button>
-                        <form action="../event/delete-event.php" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบอีเว้นต์นี้?');">
-                            <input type="hidden" name="event_id" value="<?php echo $event['event_id']; ?>">
-                            <button type="submit" class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full w-32">ลบ</button>
-                    </form>
-                    </div>
-                </div>
-            <?php endwhile; ?>
-        </div>
+</div>
+<div class="space-y-4">
+    <?php while ($event = $result->fetch_assoc()): ?>
+        <div class="flex items-center bg-white p-4 rounded-lg shadow-lg">
+            <img src="<?php echo htmlspecialchars($event['image']); ?>" alt="<?php echo htmlspecialchars($event['name']); ?>" class="w-32 h-32 object-cover rounded-lg mr-4">
+            <div class="flex-1">
+                <h3 class="text-xl font-semibold text-black"><?php echo htmlspecialchars($event['name']); ?></h3>
+            </div>
+            <div class="flex flex-row space-x-2 px-5">
+                <button type="button" onclick="window.location.href='edit_event.php?id=<?php echo $event['event_id']; ?>'" class="w-32 h-10 text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-full">
+                    แก้ไข
+                </button>
+                <form action="../event/delete-event.php" method="POST" onsubmit="return confirm('คุณแน่ใจหรือไม่ว่าต้องการลบอีเว้นต์นี้?');">
+                    <input type="hidden" name="event_id" value="<?php echo $event['event_id']; ?>">
+                    <button type="submit" class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-full w-32">ลบ</button>
+                </form> <!-- Close the form tag here -->
+            </div>
+        </div> <!-- Close the event div here -->
+    <?php endwhile; ?>
+</div>
     </main>
-</body>
-</html>
-<?php $conn->close(); ?>
-
-<!-- JavaScript สำหรับเปิด/ปิด Modal -->
+    <!-- JavaScript สำหรับเปิด/ปิด Modal -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
       const openModalBtn = document.getElementById('openModal');
@@ -172,3 +188,5 @@ $result = $conn->query($sql);
       });
     });
   </script>
+</body>
+</html>

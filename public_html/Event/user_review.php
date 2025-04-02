@@ -2,12 +2,6 @@
 session_start();
 include '../includes/navbar.php';
 
-// ตรวจสอบว่าผู้ใช้ล็อกอินหรือยัง
-if (!isset($_SESSION['session_id']) || !isset($_SESSION['id'])) {
-    header("Location:  ../homepage/aquarium.php");
-    exit();
-}
-
 $user_id = $_SESSION['id'];
 $event_id = isset($_GET['id']) ? intval($_GET['id']) : 0; // รับค่า event_id จาก URL
 
@@ -38,7 +32,7 @@ $sql_reviews = "SELECT r.*, u.first_name FROM review r JOIN users u ON r.user_id
 if ($rating_filter > 0) {
     $sql_reviews .= " AND r.rating = ?";
 }
-
+$selected_rating = isset($_GET['rating']) ? $_GET['rating'] : null;
 $stmt_reviews = $conn->prepare($sql_reviews);
 if ($rating_filter > 0) {
     $stmt_reviews->bind_param("ii", $event_id, $rating_filter);
@@ -102,10 +96,14 @@ $conn->close();
 
   <!-- Tabs for filtering reviews by rating -->
   <div class="flex flex-wrap gap-2 mb-6">
-    <a href="?id=<?php echo $event_id; ?>" class="bg-white text-black px-3 py-1 rounded-full cursor-pointer">ทั้งหมด</a>
+    <a href="?id=<?php echo $event_id; ?>" class="bg-white text-black px-3 py-1 rounded-full cursor-pointer <?php echo ($selected_rating == 0) ? 'bg-yellow-500 text-white' : ''; ?>">ทั้งหมด</a>
     <?php for ($i = 5; $i >= 1; $i--): ?>
-      <a href="?id=<?php echo $event_id; ?>&rating=<?php echo $i; ?>" class="bg-white text-black px-3 py-1 rounded-full cursor-pointer"><?php echo $i; ?> ดาว</a>
-    <?php endfor; ?>
+  <!-- ถ้าค่าของ rating เท่ากับ $i ให้เพิ่มคลาส 'bg-yellow-500' เพื่อไฮไลต์ปุ่ม -->
+  <a href="?id=<?php echo $event_id; ?>&rating=<?php echo $i; ?>" 
+     class=" <?php echo ($selected_rating == $i) ? 'bg-blue-600 text-white rounded-full px-3 py-1' : 'bg-white text-black px-3 py-1 rounded-full cursor-pointer'; ?>">
+     <?php echo $i; ?> ดาว
+  </a>  
+<?php endfor; ?>
   </div>
 
   <!-- Reviews -->

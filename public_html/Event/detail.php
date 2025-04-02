@@ -128,6 +128,7 @@
         <p class="text-gray-700 mb-4">
           Price: ฿<?php echo htmlspecialchars($event['price']); ?>
         </p>
+        <p class="text-lg mb-4">จำนวนตั๋วที่มี: <?php echo htmlspecialchars($event['ticket_quantity']); ?> ใบ</p>
       </div>
       <!-- ปุ่ม Buy Ticket -->
       <?php if (isset($_SESSION['session_id']) && $_SESSION['role'] !== 'a'): ?>
@@ -192,13 +193,8 @@
     <section class="bg-[#ffffff] text-black rounded-lg p-6">
       <h3 class="text-2xl font-semibold mb-4">ข้อมูล</h3>
       <p class="leading-relaxed">
-        <!-- ตัวอย่างข้อความ -->
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque 
-        habitant morbi tristique senectus et netus et malesuada fames ac turpis 
-        egestas. Vestibulum ante ipsum primis in faucibus orci luctus et 
-        ultrices posuere cubilia curae; Donec sollicitudin sem sed tortor 
-        consequat, et posuere arcu hendrerit. Phasellus ultrices lacus sed 
-        efficitur fermentum. Vivamus at neque massa.
+        <!-- ดึงข้อมูล description จากฐานข้อมูล -->
+        <?php echo htmlspecialchars($event['description']); ?>
       </p>
     </section>
   </main>
